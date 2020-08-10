@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kaptcha</title>
+</head>
+<body>
+<img src="/kaptcha" onclick="this.src='/kaptcha?d='+new Date()*1">
+<input maxlength="5" placeholder="请输入验证码" type="text" id="code">
+<button id="verify">点击提交验证</button>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script type="text/javascript" language="JavaScript">
+    $(function () {
+        $("#verify").click(function () {
+            let code = $("#code").val();
+            console.log(code);
+            $.ajax({
+                type: "GET",
+                url: "/verify?code=" + code,
+                success: function (response) {
+                    alert(response);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            })
+        })
+    })
+</script>
+</html>
