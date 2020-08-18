@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description:
  * @Author HueFu
  * @Date 2020-8-2 9:50
  */

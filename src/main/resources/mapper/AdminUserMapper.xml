@@ -13,7 +13,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        admin_user_id, login_user_name, login_password, nick_name, locked
+        <!--@sql select -->admin_user_id, login_user_name, login_password, nick_name, locked<!--@sql from mall.mall_admin_user -->
     </sql>
 
     <select id="query" resultMap="adminUser">

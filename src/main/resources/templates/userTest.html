@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UserTest</title>
+    <script type="text/javascript" th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/plugins/jqGrid-5.4.0/js/i18n/grid.locale-cn.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/plugins/jquery-ui/jquery-ui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/admin/plugins/jqGrid-5.4.0/js/jquery.jqGrid.min.js}"></script>
+    <script type="text/javascript" th:href="@{/admin/plugins/jqGrid-5.4.0/js/jquery.jqGrid.js}"></script>
+    <link rel="stylesheet" th:href="@{/admin/plugins/jqGrid-5.4.0/css/ui.jqgrid-bootstrap-ui.css}">
+</head>
+<body>
+<!-- JqGrid必要DOM,用于创建表格展示列表数据 -->
+<table id="jqGrid" class="table table-bordered"></table>
+<!-- JqGrid必要DOM,分页信息区域 -->
+<div id="jqGridPager"></div>
+<script>
+    $(function () {
+            jQuery("#jqGrid").jqGrid({
+                url: '/users/list',
+                datatype: "json",
+                colModel: [
+                    {label: 'id', name: 'id', index: 'id', width: 5, hidden: false, key: true},
+                    {label: '登录名', name: 'name', index: 'name', sortable: false, width: 5},
+                    {label: '添加时间', name: 'password', index: 'password', sortable: false, width: 10}
+                ],
+                height: 485,
+                rowNum: 10,
+                rowList: [10, 30, 50],
+                styleUI: 'Bootstrap',
+                loadtext: '信息读取中...',
+                rownumbers: true,
+                rownumWidth: 35,
+                autowidth: true,
+                multiselect: true,
+                pager: "#jqGridPager",
+                jsonReader: {
+                    root: "data.list",
+                    page: "data.currPage",
+                    total: "data.totalPage",
+                    records: "data.totalCount"
+                },
+                prmNames: {
+                    page: "page",
+                    rows: "limit",
+                    order: "order"
+                },
+                gridComplete: function () {
+                    console.log("请求数据成功了吧");
+                    //隐藏grid底部滚动条
+                    $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
+                }
+            });
+    });
+
+
+</script>
+</body>
+</html>

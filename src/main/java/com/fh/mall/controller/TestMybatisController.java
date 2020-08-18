@@ -1,7 +1,7 @@
 package com.fh.mall.controller;
 
-import com.fh.mall.dao.UserMapper;
-import com.fh.mall.entity.User;
+import com.fh.mall.dao.MallUserMapper;
+import com.fh.mall.entity.MallUser;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description:
  * @Author HueFu
  * @Date 2020-8-2 12:03
  */
@@ -17,30 +17,30 @@ import java.util.List;
 public class TestMybatisController {
 
     @Resource
-    private UserMapper userMapper;
+    private MallUserMapper mallUserMapper;
     
     @GetMapping("/queryAll")
-    public List<User> queryAll(){
-        List<User> maps = userMapper.queryAll();
+    public List<MallUser> queryAll(){
+        List<MallUser> maps = mallUserMapper.queryAll();
         return maps;
     }
 
 
     @GetMapping("/insert")
-    public int insertUser(User user){
-        int i = userMapper.insertUser(user);
+    public int insertUser(MallUser user){
+        int i = mallUserMapper.insertUser(user);
         return i;
     }
 
     @GetMapping("/updateUser")
-    public int updateUser(User user){
-        int i = userMapper.updateUser(user);
+    public int updateUser(MallUser user){
+        int i = mallUserMapper.updateUser(user);
         return i;
     }
 
     @GetMapping("/deleteUser")
-    public int deleteUset(User user){
-        int i = userMapper.deleteUset(user);
+    public int deleteUset(MallUser user){
+        int i = mallUserMapper.deleteUset(user);
         return i;
     }
 }

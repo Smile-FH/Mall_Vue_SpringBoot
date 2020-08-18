@@ -1,71 +1,73 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/header::head-fragment"></head>
-<body>
-<header th:replace="admin/header::header-fragment"></header>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <header th:replace="admin/header::header-fragment"></header>
 
-<div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
 
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
 
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-
-    <div class="content-header">
-        <div class="container-fluid">
-        </div>
-    </div>
-
-    <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <!-- left column -->
-                <div class="col-md-6">
-                    <!-- general form elements -->
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Modify personal information</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form th:action="@{/admin/profile/modify}" method="post">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="account">Account</label>
-                                    <input type="text" class="form-control" id="account" placeholder="Login User Name" th:value="${loginUserName}" name="loginUserName">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nickName">Nick Name</label>
-                                    <input type="text" class="form-control" id="nickName" placeholder="Nick Name" th:value="${nickName}" name="nickName">
-                                </div>
-                                <div class="form-group">
-                                    <label for="oldPassword">Old Password</label>
-                                    <input type="password" class="form-control" id="oldPassword" placeholder="Old Password" name="oldLoginPassword">
-                                </div>
-                                <div class="form-group">
-                                    <label for="oldPassword">New Password</label>
-                                    <input type="password" class="form-control" id="newPassword" placeholder="New Password" name="newLoginPassword">
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-
-                            <div class="card-footer">
-                                <button type="submit" class="col-12 btn btn-primary">Change It</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- /.card -->
-                </div>
+        <div class="content-header">
+            <div class="container-fluid">
             </div>
         </div>
-    </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <!-- left column -->
+                    <div class="col-md-6">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Modify personal information</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form th:action="@{/admin/profile/modify}" method="post">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="account">Account</label>
+                                        <input type="text" class="form-control" id="account"
+                                               placeholder="Login User Name" th:value="${loginUserName}"
+                                               name="loginUserName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nickName">Nick Name</label>
+                                        <input type="text" class="form-control" id="nickName" placeholder="Nick Name"
+                                               th:value="${nickName}" name="nickName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="oldPassword">Old Password</label>
+                                        <input type="password" class="form-control" id="oldPassword"
+                                               placeholder="Old Password" name="oldLoginPassword">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="oldPassword">New Password</label>
+                                        <input type="password" class="form-control" id="newPassword"
+                                               placeholder="New Password" name="newLoginPassword">
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="col-12 btn btn-primary">Change It</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div th:replace="admin/footer::footer-fragment"></div>
 </div>
-
-
-
-
-<div th:replace="admin/footer::footer-fragment"></div>
 
 <div th:replace="admin/commonjs::commonjs-fragment"></div>
 </body>

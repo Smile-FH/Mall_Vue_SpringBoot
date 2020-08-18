@@ -1,5 +1,6 @@
 package com.fh.mall.controller.admin;
 
+import com.fh.mall.common.ServiceResultEnum;
 import com.fh.mall.entity.AdminUser;
 import com.fh.mall.service.AdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
 
 /**
  * @Description: TODO(这里用一句话描述这个类的作用)
@@ -29,15 +29,17 @@ public class AdminController {
         return "admin/index";
     }
 
+    @GetMapping("/users")
+    public String users(HttpServletRequest request){
+        request.setAttribute("path","users");
+        return "admin/mall_user";
+    }
+
+
     @GetMapping("/category")
     public String category(HttpServletRequest request){
         request.setAttribute("path","category");
         return "admin/category";
-    }
-
-    @GetMapping("/login")
-    public String login(){
-        return "admin/login";
     }
 
     @GetMapping("/profile")
@@ -87,7 +89,7 @@ public class AdminController {
                 request.getSession().removeAttribute("adminUserId");
                 request.getSession().removeAttribute("nickName");
                 request.getSession().removeAttribute("errorMsg");
-                return "更新成功啦";
+                return ServiceResultEnum.SUCCESS.getResult();
             case 2:
                 return "原密码错误";
             default:
@@ -95,49 +97,13 @@ public class AdminController {
         };
         return "全部执行完了，啥都没发生？？？少了一种情况吧？";
     }
-    
+
+
     @GetMapping("/logout")
     public String logout(HttpSession session){
-        Enumeration<String> attributeNames = session.getAttributeNames();
-        while (attributeNames.hasMoreElements()) {
-            System.out.println(attributeNames.nextElement());
-        }
         session.removeAttribute("nickName");
         session.removeAttribute("adminUserId");
         return "admin/login";
     }
 
-    @PostMapping("/login")
-    public String signin(
-            @RequestParam("loginUserName") String loginUserName,
-            @RequestParam("loginPassword") String loginPassword,
-            @RequestParam("verifyCode") String verifyCode,
-            HttpSession session){
-        if (StringUtils.isEmpty(verifyCode)){
-            session.setAttribute("errorMsg", "验证码不能为空");
-            return "redirect:/admin/login";
-        }
-
-        if (StringUtils.isEmpty(loginUserName) || StringUtils.isEmpty(loginPassword)){
-            session.setAttribute("errorMsg", "用户账户和密码不能为空");
-            return "redirect:/admin/login";
-        }
-        String kaptchaCode = session.getAttribute("verifyCode") + "";
-        if (StringUtils.isEmpty(kaptchaCode) || !verifyCode.equals(kaptchaCode)){
-            session.setAttribute("errorMsg", "验证码错误");
-            return "redirect:/admin/login";
-        }
-
-        AdminUser adminUser = adminUserService.login(loginUserName, loginPassword);
-        System.out.println(adminUser.toString());
-        if (adminUser != null) {
-            session.setAttribute("nickName", adminUser.getNickName());
-            session.setAttribute("adminUserId", adminUser.getAdminUserId());
-            return "redirect:/admin/index";
-        } else {
-            session.setAttribute("errorMsg", "登录信息错误，请联系技术人员！");
-        }
-        return "redirect:/admin/login";
-    }
-    
 }

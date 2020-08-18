@@ -3,7 +3,7 @@ package com.fh.mall.entity;
 import lombok.Data;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: AdminUser JavaBean
  * @Author HueFu
  * @Date 2020-8-8 15:22
  */

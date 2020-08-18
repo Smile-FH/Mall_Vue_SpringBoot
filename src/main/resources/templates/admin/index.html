@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/header::head-fragment"></head>
-<body>
-<header th:replace="admin/header::header-fragment"></header>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <header th:replace="admin/header::header-fragment"></header>
 
-<div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
 
-
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+            </div>
         </div>
-    </div>
-    <div class="content">
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                <h3 class="card-title">首页</h3>
-            </div> <!-- /.card-body -->
-            <div class="card-body">
-                <div class="panel panel-default">
-                    <div style="padding: 10px 0 20px 10px;">
-                        页面布局制作及跳转逻辑实现
+        <div class="content">
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">首页</h3>
+                </div> <!-- /.card-body -->
+                <div class="card-body">
+                    <div class="panel panel-default">
+                        <div style="padding: 10px 0 20px 10px;">
+                            页面布局制作及跳转逻辑实现
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div th:replace="admin/footer::footer-fragment"></div>
 </div>
-
-
-<div th:replace="admin/footer::footer-fragment"></div>
-
 <div th:replace="admin/commonjs::commonjs-fragment"></div>
 
 </body>

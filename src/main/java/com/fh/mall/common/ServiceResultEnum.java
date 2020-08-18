@@ -1,7 +1,7 @@
 package com.fh.mall.common;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: TODO(枚举全局返回信息，目前只有SUCCESS)
  * @Author HueFu
  * @Date 2020-8-10 20:52
  */

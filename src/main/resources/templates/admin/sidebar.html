@@ -14,23 +14,29 @@
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-header">MISCELLANEOUS</li>
+                <li class="nav-header">首页管理</li>
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
-                    <a th:href="@{/admin/index}" th:class="${path}=='index'?'nav-link active':'nav-link'">
+                    <a th:href="@{/admin/carousels}" th:class="${path}=='carousels'?'nav-link active':'nav-link'">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            后台管理的第一个栏目
+                            轮播图管理
                         </p>
                     </a>
                 </li>
 
+            </ul>
+
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-header">管理模块</li>
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
-                    <a th:href="@{/admin/category}" th:class="${path}=='category'?'nav-link active':'nav-link'">
+                    <a th:href="@{/admin/users}" th:class="${path}=='users'?'nav-link active':'nav-link'">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            后台管理的第二个栏目
+                            会员管理
                         </p>
                     </a>
                 </li>
@@ -42,7 +48,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open">
-                    <a th:href="@{/admin/profile}" th:class="${path}=='prival'?'nav-link active':'nav-link'">
+                    <a th:href="@{/admin/profile}" th:class="${path}=='profile'?'nav-link active':'nav-link'">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             修改个人信息
@@ -58,7 +64,6 @@
                         </p>
                     </a>
                 </li>
-
             </ul>
         </nav>
     </div>
