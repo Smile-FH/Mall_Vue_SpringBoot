@@ -29,13 +29,6 @@ public class AdminController {
         return "admin/index";
     }
 
-    @GetMapping("/users")
-    public String users(HttpServletRequest request){
-        request.setAttribute("path","users");
-        return "admin/mall_user";
-    }
-
-
     @GetMapping("/category")
     public String category(HttpServletRequest request){
         request.setAttribute("path","category");

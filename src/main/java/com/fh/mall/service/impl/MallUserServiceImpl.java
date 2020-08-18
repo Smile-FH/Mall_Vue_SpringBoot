@@ -5,6 +5,7 @@ import com.fh.mall.entity.MallUser;
 import com.fh.mall.service.MallUserService;
 import com.fh.mall.utils.PageQueryUtil;
 import com.fh.mall.utils.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

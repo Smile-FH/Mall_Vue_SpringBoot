@@ -8,9 +8,15 @@ package com.fh.mall.common;
 public enum ServiceResultEnum {
 
     /**
+     *  数据库操作失败
+     */
+    DB_ERROR("database error"),
+
+    /**
      *  Service运行且返回成功
      */
     SUCCESS("success");
+
 
     private String result;
 
