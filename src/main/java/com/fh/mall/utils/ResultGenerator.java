@@ -3,15 +3,13 @@ package com.fh.mall.utils;
 import org.springframework.util.StringUtils;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * 封装Result类的工厂类
+ * @Description:
  * @Author HueFu
  * @Date 2020-8-11 10:44
  */
 public class ResultGenerator {
 
-    /**
-     * 看看后期能不能把这里的变量给删掉，在common中建立一个公共的信息包
-     */
     private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
 
     private static final String DEFAULT_FAIL_MESSAGE = "FAIL";
@@ -24,7 +22,7 @@ public class ResultGenerator {
 //         我可以创建一个公用的result吗
         Result result = new Result();
         result.setResultCode(RESULT_SUCCESS_CODE);
-        result.setMassage(message);
+        result.setMessage(message);
         return result;
     }
 
@@ -32,7 +30,7 @@ public class ResultGenerator {
 //         我可以创建一个公用的result吗
         Result<Object> result = new Result<>();
         result.setResultCode(RESULT_SUCCESS_CODE);
-        result.setMassage(DEFAULT_SUCCESS_MESSAGE);
+        result.setMessage(DEFAULT_SUCCESS_MESSAGE);
         result.setData(data);
         return result;
     }
@@ -42,9 +40,9 @@ public class ResultGenerator {
             Result result = new Result();
             result.setResultCode(RESULT_FAIL_CODE);
             if (StringUtils.isEmpty(message)){
-                result.setMassage(DEFAULT_FAIL_MESSAGE);
+                result.setMessage(DEFAULT_FAIL_MESSAGE);
             }else {
-                result.setMassage(message);
+                result.setMessage(message);
             }
             return result;
         }
@@ -52,16 +50,7 @@ public class ResultGenerator {
     //         我可以创建一个公用的result吗
             Result result = new Result();
             result.setResultCode(code);
-            result.setMassage(message);
+            result.setMessage(message);
             return result;
         }
-
-
-
-
-
-
-
-
-
 }

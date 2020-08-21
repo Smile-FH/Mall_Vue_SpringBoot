@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * @Description: TODO(MallUser的业务层实现)
+ * @Description: MallUser的业务层实现类
  * @Author HueFu
  * @Date 2020-8-2 9:52
  */
@@ -34,4 +36,12 @@ public class MallUserServiceImpl implements MallUserService {
         return new PageResult(totalUser, pageUser, pageQueryUtil.getLimit(), pageQueryUtil.getCurrentPage());
     }
 
+    @Override
+    public int lockUser(Integer[] ids, int lockStatus) {
+        Map<String, Object> lockParams = new HashMap<>();
+        lockParams.put("ids", ids);
+        lockParams.put("lockStatus", lockStatus);
+        int i = mallUserMapper.lockUser(lockParams);
+        return i;
+    }
 }

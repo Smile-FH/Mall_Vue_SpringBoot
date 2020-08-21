@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 商城用户管理业务的实现类
  * @Author HueFu
  * @Date 2020-8-8 20:22
  */
@@ -50,6 +50,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         } else if (adminUserDetailByID.getNickName().equals(nickName)){
             nickName = null;
         }
+        newLoginPassword = MD5Util.MD5Encode(newLoginPassword, "UTF-8");
         Map<String, Object> updateParam = new HashMap<>();
         updateParam.put("loginUserName", loginUserName);
         updateParam.put("loginPassword", newLoginPassword);

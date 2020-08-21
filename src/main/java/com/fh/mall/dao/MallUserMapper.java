@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 商城用户管理的持久层接口
  * @Author HueFu
  * @Date 2020-8-2 9:52
  */
 public interface MallUserMapper {
 
     List<MallUser> queryAll()/**
-    * @Description: TODO(查询用户表中所有的用户数据)
+    * @Description: 查询用户表中所有的用户数据
     * @Author: HueFu
     * @Date: 2020-8-2 14:50
     * @MethodName: queryAll
@@ -23,7 +23,7 @@ public interface MallUserMapper {
     */;
 
     int insertUser(MallUser user)/**
-    * @Description: TODO(添加一个用户进数据库用户表)
+    * @Description: 添加一个用户进数据库用户表
     * @Author: HueFu
     * @Date: 2020-8-2 14:50
     * @MethodName: insertUser
@@ -33,7 +33,7 @@ public interface MallUserMapper {
 
 
     int updateUser(MallUser user)/**
-    * @Description: TODO(更新一个单一的用户数据)
+    * @Description: 更新一个单一的用户数据
     * @Author: HueFu
     * @Date: 2020-8-2 14:52
     * @MethodName: updateUser
@@ -42,7 +42,7 @@ public interface MallUserMapper {
     */;
 
     int deleteUset(MallUser user)/**
-    * @Description: TODO(删除一个用户)
+    * @Description: 删除一个用户
     * @Author: HueFu
     * @Date: 2020-8-2 14:54
     * @MethodName: deleteUset
@@ -51,7 +51,7 @@ public interface MallUserMapper {
     */;
 
     List<MallUser> getPageUser(@Param("pageParam") Map<String, Object> pageParam)/**
-    * @Description: TODO(分页查询User表)
+    * @Description: 分页查询User表
     * @Author: HueFu
     * @Date: 2020-8-10 15:50
     * @MethodName: getPageUser
@@ -60,12 +60,19 @@ public interface MallUserMapper {
     */;
 
     int getTotalUser()/** 
-    * @Description: TODO(查询用户表的用户总数)
+    * @Description: 查询用户表的用户总数
     * @Author: HueFu
     * @Date: 2020-8-10 14:19
     * @MethodName: getTotalUser
     * @Param: [] 
     * @Return: int 
     */;
+
+    /**
+     * 锁定用户的mapper接口
+     * @param lockParams
+     * @return
+     */
+    int lockUser(@Param("lockParams") Map<String, Object> lockParams);
 
 }

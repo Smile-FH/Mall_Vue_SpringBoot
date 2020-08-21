@@ -6,7 +6,6 @@
     <header th:replace="admin/header::header-fragment"></header>
     <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
 
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
@@ -18,7 +17,6 @@
                     <div class="card-header">
                         <h3 class="card-title">会员管理页</h3>
                     </div> <!-- /.card-body -->
-
                     <div class="card-body">
                         <div class="grid-btn">
                             <button class="btn btn-info" onclick="lockUser(0)"><i
@@ -32,18 +30,15 @@
                             <table id="jqGrid"></table>
                             <div id="jqGridPager"></div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div th:replace="admin/footer::footer-fragment"></div>
 </div>
 <div th:replace="admin/commonjs::commonjs-fragment"></div>
-<!--<script type="text/javascript" th:href="@{/admin/plugins/jqGrid-5.4.0/js/jquery.jqGrid.js}"></script>-->
-<!--<script type="text/javascript" th:src="@{/admin/plugins/jqGrid-5.4.0/js/jquery.jqGrid.min.js}"></script>-->
-<!--<script type="text/javascript" th:src="@{/admin/plugins/jqGrid-5.4.0/js/minified/i18n/grid.locale-cn.js}"></script>-->
 <script type="text/javascript" th:src="@{/admin/dist/js/mallUser.js}"></script>
 </body>
 </html>

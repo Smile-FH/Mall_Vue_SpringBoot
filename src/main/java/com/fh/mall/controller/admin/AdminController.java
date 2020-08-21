@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 管理员用户的控制层处理
  * @Author HueFu
  * @Date 2020-8-2 21:49
  */
@@ -51,9 +51,9 @@ public class AdminController {
     @PostMapping("/profile/modify")
     @ResponseBody
     public String modify(
-            @RequestParam("loginUserName") String loginUserName,
-            @RequestParam("oldLoginPassword") String oldLoginPassword,
-            @RequestParam("newLoginPassword") String newLoginPassword,
+            @RequestParam("account") String loginUserName,
+            @RequestParam("oldPassword") String oldLoginPassword,
+            @RequestParam("newPassword") String newLoginPassword,
             @RequestParam("nickName") String nickName,
             HttpServletRequest request){
         if (StringUtils.isEmpty(loginUserName)){
@@ -68,7 +68,6 @@ public class AdminController {
         if (StringUtils.isEmpty(nickName)){
             return "Nick Name不能为空";
         }
-
         if (oldLoginPassword.equals(newLoginPassword)) {
             return "新密码不能和旧密码相同";
         }

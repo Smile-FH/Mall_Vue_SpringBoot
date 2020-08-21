@@ -37,7 +37,6 @@ class MallApplicationTests {
 
 	@Test
 	public void getPathTest(){
-		// TODO (获取配置文件中的路径信息一直为空)
 //		String property = environment.getProperty("upload.path");
 //		System.out.println(property);
 //		getUploadPath.setUploadPath("fff");

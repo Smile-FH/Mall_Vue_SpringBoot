@@ -6,11 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Map;
 
 /**
- * @Description:
- * TODO(对mall_admin_user表的数据操作DAO接口，
- *      finish：通过查询管理员用户 and 更新管理员用户
- *      // todo 添加管理员)
- *
+ * @Description: TODO(mall_admin_user持久层接口 添加管理员？)
+ * 通过查询管理员用户 and 更新管理员用户
  * @Author HueFu
  * @Date 2020-8-8 20:12
  */

@@ -6,9 +6,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @Description: TODO(一个提取前端发送过来Map数据的工具类)
- * @Author HueFu
- * @Date 2020-8-11 9:24
+ * Description: 提取前端发送过来Map数据的工具类
+ * Author HueFu
+ * Date 2020-8-11 9:24
  */
 @Data
 public class PageQueryUtil extends LinkedHashMap<String, Object> {

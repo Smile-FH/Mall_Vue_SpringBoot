@@ -3,12 +3,18 @@ package com.fh.mall.service;
 import com.fh.mall.entity.AdminUser;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @Author HueFu
+ * @Description: 管理员用户模块供控制层调用的业务层接口
+ * @author HueFu
  * @Date 2020-8-11 10:14
  */
 public interface AdminUserService {
 
+    /**
+     * 管理员登录业务接口
+     * @param loginUserName
+     * @param loginPassword
+     * @return
+     */
     AdminUser login(String loginUserName, String loginPassword);
 
     AdminUser getAdminUserDetailByID(int adminUserId);

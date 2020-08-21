@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 测试分页Jquery插件的一个持久层类
  * @Author HueFu
  * @Date 2020-8-11 20:38
  */
 public interface JqGridTestMapper {
 
     List<TestUser> getPageUser(@Param("pageParam") Map<String, Object> pageParam)/**
-     * @Description: TODO(分页查询User表)
+     * @Description: 分页查询User表
      * @Author: HueFu
      * @Date: 2020-8-10 15:50
      * @MethodName: getPageUser
@@ -23,7 +23,7 @@ public interface JqGridTestMapper {
      */;
 
     int getTotalUser()/**
-     * @Description: TODO(查询用户表的用户总数)
+     * @Description: 查询用户表的用户总数
      * @Author: HueFu
      * @Date: 2020-8-10 14:19
      * @MethodName: getTotalUser

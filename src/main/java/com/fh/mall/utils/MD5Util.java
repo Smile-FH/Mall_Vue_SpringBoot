@@ -5,7 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * MD5加密工具类
+ * @Description:
  * @Author HueFu
  * @Date 2020-8-8 20:25
  */

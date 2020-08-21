@@ -12,7 +12,7 @@ import com.fh.mall.service.MallCarouselService;
 import java.util.List;
 
 /**
- * @Description: TODO(carousel业务层实现)
+ * @Description: carousel业务层实现类
  * @Author HueFu
  * @Date 2020-8-18 10:35 
  */

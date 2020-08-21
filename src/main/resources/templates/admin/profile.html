@@ -28,13 +28,13 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form th:action="@{/admin/profile/modify}" method="post">
+                            <form id="userInfoForm">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="account">Account</label>
                                         <input type="text" class="form-control" id="account"
                                                placeholder="Login User Name" th:value="${loginUserName}"
-                                               name="loginUserName">
+                                               name="account" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="nickName">Nick Name</label>
@@ -44,18 +44,18 @@
                                     <div class="form-group">
                                         <label for="oldPassword">Old Password</label>
                                         <input type="password" class="form-control" id="oldPassword"
-                                               placeholder="Old Password" name="oldLoginPassword">
+                                               placeholder="Old Password" name="oldPassword">
                                     </div>
                                     <div class="form-group">
                                         <label for="oldPassword">New Password</label>
                                         <input type="password" class="form-control" id="newPassword"
-                                               placeholder="New Password" name="newLoginPassword">
+                                               placeholder="New Password" name="newPassword">
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button type="submit" class="col-12 btn btn-primary">Change It</button>
+                                    <button type="button" id="updateUserInfoButton" onsubmit="return false;" class="col-12 btn btn-primary">Change It</button>
                                 </div>
                             </form>
                         </div>
@@ -70,5 +70,6 @@
 </div>
 
 <div th:replace="admin/commonjs::commonjs-fragment"></div>
+<script th:src="@{/admin/dist/js/profile.js}"></script>
 </body>
 </html>

@@ -32,4 +32,13 @@
 #         在Mapper的注释中千万不要出现消息表达式符号，Mapper运行的时候注释中的消息表达式也会去正常执行，容易出现没有这个变量名，或者变量不能被设置的错误
     </select>
 
+    <update id="lockUser">
+        update mall.mall_user
+        set locked_flag = #{lockParams.lockStatus, jdbcType=INTEGER}
+        where user_id in
+        <foreach collection="lockParams.ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
+
 </mapper>

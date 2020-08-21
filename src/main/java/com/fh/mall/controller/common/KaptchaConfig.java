@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Properties;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: kaptcha验证码的详细生成规则
  * @Author HueFu
  * @Date 2020-8-7 15:47
  */

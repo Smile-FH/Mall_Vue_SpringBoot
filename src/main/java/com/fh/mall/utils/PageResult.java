@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 封装Mapper中查询出分页数据的实体类
  * @Author HueFu
  * @Date 2020-8-11 11:17
  */

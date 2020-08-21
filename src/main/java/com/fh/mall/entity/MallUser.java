@@ -1,5 +1,6 @@
 package com.fh.mall.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -28,6 +29,7 @@ public class MallUser {
 
     private int lockedFlag;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC+8")
     private Timestamp createTime;
 
 }

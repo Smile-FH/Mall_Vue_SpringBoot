@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 登录拦截配置类
  * @Author HueFu
  * @Date 2020-8-8 21:24
  */
