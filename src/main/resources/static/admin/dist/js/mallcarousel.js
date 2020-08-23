@@ -134,45 +134,9 @@ function addCarousel() {
                             }
                         }
                     })
-
                 }
-
             }
         })
-
-        // let map = {
-        //     redirectUrl: result.value[0],
-        //     carouselRank: carouselRank,
-        //     carouselId: data.carouselId,
-        //     updateTime: time()
-        // };
-
-        // if (result.value) {
-        //     let answers = JSON.stringify(map);
-        //     $.ajax({
-        //         type: "post",
-        //         url: "/admin/carousel/update",
-        //         contentType: "application/json",
-        //         data: answers,
-        //         success: result => {
-        //             if (result.resultCode === 200) {
-        //                 Swal.fire({
-        //                     icon: "success",
-        //                     title: "修改成功啦！"
-        //                 }).then(value => {
-        //                     if (value.isConfirmed) {
-        //                         reload();
-        //                     }
-        //                 })
-        //             } else {
-        //                 Swal.fire({
-        //                     icon: "error",
-        //                     title: "哎呀呀，错了呢，一会儿再试试吧"
-        //                 })
-        //             }
-        //         }
-        //     })
-        // }
     })
 }
 
@@ -249,13 +213,15 @@ function updateCarousel() {
                 let result = Number(value);
                 if (!result) {
                     return "排序值只能是数字偶！";
+                } else if (result>999999) {
+                    return "排序值数字只能是六位以下偶！"
                 }
             }
         }
     ]).then((result) => {
         let map = {
             redirectUrl: result.value[0],
-            carouselRank: carouselRank,
+            carouselRank: result.value[1],
             carouselId: data.carouselId,
             updateTime: time()
         };

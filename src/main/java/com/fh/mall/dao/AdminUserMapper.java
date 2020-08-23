@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.Map;
 
 /**
- * @Description: TODO(mall_admin_user持久层接口 添加管理员？)
+ * @Description: mall_admin_user持久层接口 添加管理员？
  * 通过查询管理员用户 and 更新管理员用户
  * @Author HueFu
  * @Date 2020-8-8 20:12
@@ -30,5 +30,4 @@ public interface AdminUserMapper {
     * @Param: [updateParam]
     * @Return: void
     */;
-
 }
