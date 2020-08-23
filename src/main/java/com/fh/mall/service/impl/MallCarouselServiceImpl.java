@@ -9,7 +9,9 @@ import com.fh.mall.entity.MallCarousel;
 import com.fh.mall.dao.MallCarouselMapper;
 import com.fh.mall.service.MallCarouselService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description: carousel业务层实现类
@@ -60,6 +62,14 @@ public class MallCarouselServiceImpl implements MallCarouselService{
         List<MallCarousel> mallCarousels = mallCarouselMapper.getPageCarousel(pageQueryUtil);
         int totalCarousel = mallCarouselMapper.getTotalCarousel();
         return new PageResult(totalCarousel, mallCarousels, pageQueryUtil.getLimit(), pageQueryUtil.getCurrentPage());
+    }
+
+    @Override
+    public int delCarousel(Integer[] ids) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("ids", ids);
+        int i = mallCarouselMapper.delCarousel(params);
+        return i;
     }
 
 }

@@ -59,3 +59,13 @@ function reload() {
         page: page
     }).trigger('reloadGrid');
 }
+
+/**
+ * 获取当前时间yyyy-MM-dd HH:mm:ss格式
+ * @param time
+ * @returns {string}
+ */
+function time(time = +new Date()) {
+    let date = new Date(time + 8 * 3600 * 1000); // 增加8小时
+    return date.toJSON().substr(0, 19).replace('T', ' ');
+}

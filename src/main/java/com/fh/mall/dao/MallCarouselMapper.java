@@ -33,4 +33,11 @@ public interface MallCarouselMapper {
     List<MallCarousel> getPageCarousel(@Param("carouselPageParams") Map<String, Object> carouselPageParams);
 
     int getTotalCarousel();
+
+    /**
+     * Batch deletion
+     * @param carouselParams
+     * @return
+     */
+    int delCarousel(@Param("carouselParams")Map<String, Object> carouselParams);
 }

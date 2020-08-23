@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /** 
  * @Description: carousel实体类
@@ -40,7 +41,7 @@ public class MallCarousel {
     /**
     * 创建时间
     */
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC+8")
     private Date createTime;
 
     /**
@@ -51,7 +52,7 @@ public class MallCarousel {
     /**
     * 修改时间
     */
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC+8")
     private Date updateTime;
 
     /**

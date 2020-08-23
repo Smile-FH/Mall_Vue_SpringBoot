@@ -78,8 +78,8 @@ $(function () {
 });
 
 function lockUser(lockStatus) {
-    var ids = $('#jqGrid').jqGrid('getGridParam', 'selarrrow');
-    if (ids === null) {
+    let ids = $('#jqGrid').jqGrid('getGridParam', 'selarrrow');
+    if (ids.length === 0) {
         return;
     }
 
@@ -97,7 +97,7 @@ function lockUser(lockStatus) {
         cancelButtonText: "算了，饶了他吧",
         showCancelButton: true
     }).then(result => {
-        if (result) {
+        if (result.isConfirmed) {
             $.ajax({
                 type: "post",
                 url: "/admin/users/lock/" + lockStatus,

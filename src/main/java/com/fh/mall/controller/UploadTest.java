@@ -1,8 +1,7 @@
 package com.fh.mall.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,16 +17,18 @@ import java.util.Random;
  * @Author HueFu
  * @Date 2020-8-17 21:39
  */
-@RestController
+@Controller
 public class UploadTest {
 
     private static final String FILE_UPLOAD_PATH = "D:\\Picture\\project\\mall\\";
 
     @PostMapping("/upload")
-    public String upload(@RequestParam("file")MultipartFile file){
+    @ResponseBody
+    public String upload(@RequestParam("file") MultipartFile file){
         if (file.isEmpty()) {
             return "上传文件为空，上传失败";
         }
+        System.out.println("上传来了啊");
         String filename = file.getOriginalFilename();
         String suffixName = filename.substring(filename.lastIndexOf("."));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");

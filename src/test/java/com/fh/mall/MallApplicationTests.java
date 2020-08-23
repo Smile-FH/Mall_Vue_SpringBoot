@@ -37,11 +37,6 @@ class MallApplicationTests {
 
 	@Test
 	public void getPathTest(){
-//		String property = environment.getProperty("upload.path");
-//		System.out.println(property);
-//		getUploadPath.setUploadPath("fff");
-		String uploadPath = getUploadPath.getUploadPath();
-		System.out.println(uploadPath);
 	}
 
 }

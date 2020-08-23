@@ -19,10 +19,6 @@ public class MallWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired
     private AdminLoginInterceptor adminLoginInterceptor;
 
-    @Autowired
-    private GetUploadPath getUploadPath;
-
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         /**
@@ -50,6 +46,7 @@ public class MallWebMvcConfigurer implements WebMvcConfigurer {
          * @Param: [registry]
          * @Return: void
          */
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:"+getUploadPath.getUploadPath());
+        registry.addResourceHandler("/upload/**")
+                .addResourceLocations("file:"+GetUploadPath.uploadPath);
     }
 }

@@ -4,14 +4,14 @@ $(function () {
         datatype: "json",
         colModel: [
             { label: 'id', name: 'carouselId', index: 'carouselId', width: 50, key: true, hidden: true },
-            { label: 'Url', name: 'carouselUrl', index: 'carouselUrl', width: 120 },
-            { label: '点击Url', name: 'redirectUrl', index: 'redirectUrl', width: 120 },
+            { label: 'Image', name: 'carouselUrl', index: 'carouselUrl', width: 120, formatter: coverImageFormatter },
+            { label: '跳转链接', name: 'redirectUrl', index: 'redirectUrl', width: 120 },
             { label: '排序值', name: 'carouselRank', index: 'carouselRank', width: 60, align: 'center' },
-            { label: '是否删除', name: 'isDeleted', index: 'isDeleted', width: 60 },
-            { label: '注册时间', name: 'createTime', index: 'createTime', width: 60 },
-            { label: '注册人', name: 'createUser', index: 'createUser', width: 60 },
-            { label: '更新时间', name: 'updateTime', index: 'updateTime', width: 60 },
-            { label: '更新人', name: 'updateUser', index: 'updateUser', width: 60 },
+            { label: '是否删除', name: 'isDeleted', index: 'isDeleted', width: 60, hidden:true },
+            { label: '注册时间', name: 'createTime', index: 'createTime', width: 60, hidden:true },
+            { label: '注册人', name: 'createUser', index: 'createUser', width: 60, hidden:true },
+            { label: '更新时间', name: 'updateTime', index: 'updateTime', width: 60, hidden:true },
+            { label: '更新人', name: 'updateUser', index: 'updateUser', width: 60, hidden:true },
         ],
         height: 450,
         rowNum: 10,
@@ -39,7 +39,13 @@ $(function () {
             //隐藏grid底部滚动条
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x": "hidden" });
         }
+
     });
+
+    function coverImageFormatter(cellvalue) {
+        return "<img src='" + cellvalue + "' height=\"120\" width=\"160\" alt='coverImage'/>";
+    }
+
 
     $(window).resize(function () {
         $("#jqGrid").setGridWidth($(".card-body").width());
@@ -48,32 +54,237 @@ $(function () {
 
 function addCarousel() {
     Swal.mixin({
-        input: 'file',
         confirmButtonText: 'Next &rarr;',
         showCancelButton: true,
         progressSteps: ['1', '2', '3']
     }).queue([
         {
+            input: 'file',
             title: '上传轮播图',
+            inputValidator: file => {
+                if (!file) {
+                    return "请选择上传图片";
+                }
+                let fileName = file.name;
+                let suffixIndex = fileName.lastIndexOf(".");
+                var suffix = fileName.substr(suffixIndex + 1);
+                if (!/^(jpg|jpeg|png|gif)$/.test(suffix)) {
+                    // alert('只支持jpg、png、gif格式的文件！');
+                    return "只支持jpg、png、gif格式的文件！";
+                }
+            },
         },
         {
             title: '请输入跳转地址',
-            input: 'url'
-        },{
-            title: '排序值',
-            input: 'text'
+            input: 'url',
+            inputValidator: value => {
+                let regExp = "^(http|https|ftp)\\://([a-zA-Z0-9\\.\\-]+(\\:[a-zA-Z0-9\\.&%\\$\\-]+)*@)?((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\\-]+\\.)*[a-zA-Z0-9\\-]+\\.[a-zA-Z]{2,4})(\\:[0-9]+)?(/[^/][a-zA-Z0-9\\.\\,\\?\\'\\\\/\\+&%\\$#\\=~_\\-@]*)*$";
+                let exp = new RegExp(regExp);
+                if (!exp.test(value)) {
+                    return "URL不正确啊！";
+                }
+            },
+        },
+        {
+            input: 'text',
+            title: "排序值",
+            inputValidator: value => {
+                let result = Number(value);
+                if (!result) {
+                    return "排序值只能是数字偶！";
+                }
+            }
         }
     ]).then((result) => {
+        let formData = new FormData();
+        formData.append("file", result.value[0]);
+        let redirectUrl = result.value[1];
+        let carouselRank = result.value[2];
+        $.ajax({
+            type: "POST",
+            url: "/upload/file",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: (result)=>{
+                if (result.resultCode === 200 ){
+                    let map = {
+                        carouselUrl: result.data,
+                        redirectUrl: redirectUrl,
+                        carouselRank: carouselRank
+                    };
+                    let data = JSON.stringify(map);
+
+                    $.ajax({
+                        type: "post",
+                        url: "/admin/carousel/save",
+                        contentType: "application/json",
+                        data:data,
+                        success: result=>{
+                            if (result.resultCode === 200) {
+                                Swal.fire({
+                                    icon: "success",
+                                    text: "亲，你添加成功了诶！"
+                                }).then(value => {
+                                    if (value.isConfirmed){
+                                        reload()
+                                    }
+                                })
+                            }
+                        }
+                    })
+
+                }
+
+            }
+        })
+
+        // let map = {
+        //     redirectUrl: result.value[0],
+        //     carouselRank: carouselRank,
+        //     carouselId: data.carouselId,
+        //     updateTime: time()
+        // };
+
+        // if (result.value) {
+        //     let answers = JSON.stringify(map);
+        //     $.ajax({
+        //         type: "post",
+        //         url: "/admin/carousel/update",
+        //         contentType: "application/json",
+        //         data: answers,
+        //         success: result => {
+        //             if (result.resultCode === 200) {
+        //                 Swal.fire({
+        //                     icon: "success",
+        //                     title: "修改成功啦！"
+        //                 }).then(value => {
+        //                     if (value.isConfirmed) {
+        //                         reload();
+        //                     }
+        //                 })
+        //             } else {
+        //                 Swal.fire({
+        //                     icon: "error",
+        //                     title: "哎呀呀，错了呢，一会儿再试试吧"
+        //                 })
+        //             }
+        //         }
+        //     })
+        // }
+    })
+}
+
+function delCarousel() {
+    let ids = $("#jqGrid").jqGrid('getGridParam', 'selarrrow');
+    if (ids.length === 0) {
+        return;
+    }
+    Swal.fire({
+        icon: "warning",
+        title: "删除操作",
+        text: "Are You Sure？",
+        showCancelButton: true
+    }).then(result => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "/admin/carousel/deleted",
+                contentType: "application/json",
+                data: JSON.stringify(ids),
+                success: result => {
+                    if (result.resultCode === 200) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Deleted!",
+                            text: "Your file has been deleted!"
+                        }).then(value => {
+                            if (value.isConfirmed) {
+                                reload();
+                            }
+                        })
+                    }
+                }
+            });
+        }
+    });
+}
+
+function updateCarousel() {
+    let ids = $("#jqGrid").jqGrid('getGridParam', 'selarrrow');
+    let data = $("#jqGrid").jqGrid('getRowData', ids);
+    if (ids.length === 0) {
+        return;
+    }
+    if (ids.length > 1) {
+        Swal.fire({
+            icon: "error",
+            title: "亲，一次只能更改一条记录呦"
+        });
+        return;
+    }
+
+    Swal.mixin({
+        confirmButtonText: 'Next &rarr;',
+        showCancelButton: true,
+        progressSteps: ['1', '2']
+    }).queue([
+        {
+            title: '修改跳转地址',
+            input: 'url',
+            inputValue: data.redirectUrl,
+            inputValidator: value => {
+                let regExp = "^(http|https|ftp)\\://([a-zA-Z0-9\\.\\-]+(\\:[a-zA-Z0-9\\.&%\\$\\-]+)*@)?((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\\-]+\\.)*[a-zA-Z0-9\\-]+\\.[a-zA-Z]{2,4})(\\:[0-9]+)?(/[^/][a-zA-Z0-9\\.\\,\\?\\'\\\\/\\+&%\\$#\\=~_\\-@]*)*$";
+                let exp = new RegExp(regExp);
+                if (!exp.test(value)) {
+                    return "URL不正确啊！";
+                }
+            },
+        }, {
+            title: '排序值',
+            input: 'text',
+            inputValue: data.carouselRank,
+            inputValidator: value => {
+                let result = Number(value);
+                if (!result) {
+                    return "排序值只能是数字偶！";
+                }
+            }
+        }
+    ]).then((result) => {
+        let map = {
+            redirectUrl: result.value[0],
+            carouselRank: carouselRank,
+            carouselId: data.carouselId,
+            updateTime: time()
+        };
         if (result.value) {
-            const answers = JSON.stringify(result.value);
-            Swal.fire({
-                title: 'All done!',
-                html: `
-        Your answers:
-        <pre><code>${answers}</code></pre>
-      `,
-                confirmButtonText: 'Lovely!'
+            let answers = JSON.stringify(map);
+            $.ajax({
+                type: "post",
+                url: "/admin/carousel/update",
+                contentType: "application/json",
+                data: answers,
+                success: result => {
+                    if (result.resultCode === 200) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "修改成功啦！"
+                        }).then(value => {
+                            if (value.isConfirmed) {
+                                reload();
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "哎呀呀，错了呢，一会儿再试试吧"
+                        })
+                    }
+                }
             })
         }
     })
+
 }

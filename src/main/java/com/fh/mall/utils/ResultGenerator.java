@@ -18,11 +18,11 @@ public class ResultGenerator {
 
     private static final int RESULT_FAIL_CODE = 500;
 
-    public static Result getSuccessResult(String message){
+    public static Result getSuccessResult(){
 //         我可以创建一个公用的result吗
         Result result = new Result();
         result.setResultCode(RESULT_SUCCESS_CODE);
-        result.setMessage(message);
+        result.setMessage(DEFAULT_SUCCESS_MESSAGE);
         return result;
     }
 
@@ -36,16 +36,16 @@ public class ResultGenerator {
     }
 
     public static Result getFailResult(String message){
-    //         我可以创建一个公用的result吗
-            Result result = new Result();
-            result.setResultCode(RESULT_FAIL_CODE);
-            if (StringUtils.isEmpty(message)){
-                result.setMessage(DEFAULT_FAIL_MESSAGE);
-            }else {
-                result.setMessage(message);
-            }
-            return result;
+        //         我可以创建一个公用的result吗
+        Result result = new Result();
+        result.setResultCode(RESULT_FAIL_CODE);
+        if (StringUtils.isEmpty(message)){
+            result.setMessage(DEFAULT_FAIL_MESSAGE);
+        }else {
+            result.setMessage(message);
         }
+        return result;
+    }
     public static Result getErrorResult(int code, String message){
     //         我可以创建一个公用的result吗
             Result result = new Result();

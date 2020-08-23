@@ -1,7 +1,6 @@
 package com.fh.mall.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,14 +11,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GetUploadPath {
-    @Autowired
-    private Environment env;
 
-    private String uploadPath;
+    public static String uploadPath;
 
-    public String getUploadPath() {
-        this.uploadPath = env.getProperty("upload.path");
-        return uploadPath;
+    @Value("${upload.path}")
+    public void setUploadPath(String uploadPath) {
+        GetUploadPath.uploadPath = uploadPath;
     }
-
 }

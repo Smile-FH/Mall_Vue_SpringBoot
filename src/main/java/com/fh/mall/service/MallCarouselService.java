@@ -61,4 +61,11 @@ public interface MallCarouselService{
      */
     PageResult getPageCarousel(PageQueryUtil pageQueryUtil);
 
+    /**
+     * Batch Deletion Service Interface
+     * @param ids
+     * @return
+     */
+    int delCarousel(Integer[] ids);
+
 }

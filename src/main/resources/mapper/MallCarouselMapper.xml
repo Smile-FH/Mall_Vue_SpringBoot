@@ -151,4 +151,13 @@
             update_user   = #{updateUser,jdbcType=INTEGER}
         where carousel_id = #{carouselId,jdbcType=INTEGER}
     </update>
+
+    <delete id="delCarousel">
+        delete from mall.mall_carousel
+        where carousel_id in
+        <foreach collection="carouselParams.ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
 </mapper>

@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -40,7 +41,7 @@ public class MallCarouselController {
         return ResultGenerator.getSuccessResult(mallCarouselService.getPageCarousel(pageQueryUtil));
     }
     
-    @PostMapping("/carousels/save")
+    @PostMapping("/carousel/save")
     @ResponseBody
     public Result saveCarousel(@RequestBody MallCarousel mallCarousel){
         if (StringUtils.isEmpty(mallCarousel.getCarouselUrl())
@@ -53,6 +54,26 @@ public class MallCarouselController {
             return ResultGenerator.getSuccessResult(message);
         }
         return ResultGenerator.getFailResult(message);
+    }
+
+    @PostMapping("/carousel/deleted")
+    @ResponseBody
+    public Result delCarousel(@RequestBody Integer[] ids){
+        if (ObjectUtils.isEmpty(ids)){
+            return ResultGenerator.getFailResult("要删除的参数为空啊，不可以的！");
+        }
+        int i = mallCarouselService.delCarousel(ids);
+        return ResultGenerator.getSuccessResult(i);
+    }
+
+    @PostMapping("/carousel/update")
+    @ResponseBody
+    public Result update(@RequestBody MallCarousel mallCarousel) {
+        int i = mallCarouselService.updateByPrimaryKeySelective(mallCarousel);
+        if (i <= 0){
+            return ResultGenerator.getFailResult("更新出错啦");
+        }
+        return ResultGenerator.getSuccessResult(i);
     }
     
 }
