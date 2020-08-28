@@ -1,6 +1,6 @@
 package com.fh.mall.utilsTest;
 
-import com.fh.mall.utils.GetUploadPath;
+import com.fh.mall.utils.ConstantsValue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,11 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class GetUploadPathTest {
+public class ConstantsValueTest {
 
     @Test
     public void methodsName(){
-        System.out.println(GetUploadPath.uploadPath);
+        System.out.println(ConstantsValue.uploadPath);
     }
 
 }

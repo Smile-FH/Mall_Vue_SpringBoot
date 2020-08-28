@@ -10,12 +10,21 @@ import org.springframework.stereotype.Component;
  * @Date: 2020-8-17 22:28
  */
 @Component
-public class GetUploadPath {
+public class ConstantsValue {
 
     public static String uploadPath;
 
+    public static int indexCarouselNumber;
+
     @Value("${upload.path}")
     public void setUploadPath(String uploadPath) {
-        GetUploadPath.uploadPath = uploadPath;
+        ConstantsValue.uploadPath = uploadPath;
     }
+
+    @Value("${index.carousel.number}")
+    public void setindexCarouselNumber(int indexCarouselNumber) {
+        ConstantsValue.indexCarouselNumber = indexCarouselNumber;
+    }
+
+
 }

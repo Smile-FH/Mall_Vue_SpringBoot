@@ -1,6 +1,6 @@
 package com.fh.mall.controller.common;
 
-import com.fh.mall.utils.GetUploadPath;
+import com.fh.mall.utils.ConstantsValue;
 import com.fh.mall.utils.MallUtils;
 import com.fh.mall.utils.Result;
 import com.fh.mall.utils.ResultGenerator;
@@ -38,8 +38,8 @@ public class UploadController {
         StringBuilder tempName = new StringBuilder();
         tempName.append(simpleDateFormat.format(new Date())).append(random.nextInt(100)).append(suffixName);
         String newFileName = tempName.toString();
-        File fileDirectory = new File(GetUploadPath.uploadPath);
-        File destFile = new File(GetUploadPath.uploadPath + newFileName);
+        File fileDirectory = new File(ConstantsValue.uploadPath);
+        File destFile = new File(ConstantsValue.uploadPath + newFileName);
         try {
             if (!fileDirectory.exists()){
                 if (!fileDirectory.mkdir()){
@@ -47,7 +47,7 @@ public class UploadController {
                 }
             }
             file.transferTo(destFile);
-            Result resultSuccess = ResultGenerator.getSuccessResult();
+            Result resultSuccess = ResultGenerator.getSuccessResult("");
             resultSuccess.setData(MallUtils.getHost(new URI(request.getRequestURL()+""))+"/upload/"+newFileName);
             return resultSuccess;
         } catch (Exception e) {

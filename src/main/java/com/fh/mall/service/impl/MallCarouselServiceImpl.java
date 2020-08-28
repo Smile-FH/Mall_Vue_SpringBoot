@@ -1,6 +1,8 @@
 package com.fh.mall.service.impl;
 
 import com.fh.mall.common.ServiceResultEnum;
+import com.fh.mall.controller.api.vo.MallIndexCarouselVO;
+import com.fh.mall.utils.BeanUtil;
 import com.fh.mall.utils.PageQueryUtil;
 import com.fh.mall.utils.PageResult;
 import org.springframework.stereotype.Service;
@@ -8,10 +10,9 @@ import javax.annotation.Resource;
 import com.fh.mall.entity.MallCarousel;
 import com.fh.mall.dao.MallCarouselMapper;
 import com.fh.mall.service.MallCarouselService;
+import org.springframework.util.CollectionUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Description: carousel业务层实现类
@@ -19,7 +20,7 @@ import java.util.Map;
  * @Date 2020-8-18 10:35 
  */
 @Service
-public class MallCarouselServiceImpl implements MallCarouselService{
+public class MallCarouselServiceImpl implements MallCarouselService {
 
     @Resource
     private MallCarouselMapper mallCarouselMapper;
@@ -70,6 +71,16 @@ public class MallCarouselServiceImpl implements MallCarouselService{
         params.put("ids", ids);
         int i = mallCarouselMapper.delCarousel(params);
         return i;
+    }
+
+    @Override
+    public List<MallIndexCarouselVO> getCarouselsForIndex(int number) {
+        List<MallIndexCarouselVO> indexCarouselVOS = new ArrayList<>(number);
+        List<MallCarousel> carousels = mallCarouselMapper.findCarouselByNUM(number);
+        if (!CollectionUtils.isEmpty(carousels)) {
+            indexCarouselVOS = BeanUtil.copyList(carousels,MallIndexCarouselVO.class);
+        }
+        return indexCarouselVOS;
     }
 
 }

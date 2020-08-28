@@ -1,8 +1,11 @@
 package com.fh.mall.service;
 
+import com.fh.mall.controller.api.vo.MallIndexCarouselVO;
 import com.fh.mall.entity.MallCarousel;
 import com.fh.mall.utils.PageQueryUtil;
 import com.fh.mall.utils.PageResult;
+
+import java.util.List;
 
 /**
  * @Description: 轮播图后台业务接口
@@ -67,5 +70,12 @@ public interface MallCarouselService{
      * @return
      */
     int delCarousel(Integer[] ids);
+
+    /**
+     * 返回固定数量的轮播图VO对象，vue端使用
+     * @param number
+     * @return
+     */
+    List<MallIndexCarouselVO> getCarouselsForIndex(int number);
 
 }

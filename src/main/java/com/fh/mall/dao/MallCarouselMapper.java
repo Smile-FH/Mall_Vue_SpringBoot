@@ -40,4 +40,6 @@ public interface MallCarouselMapper {
      * @return
      */
     int delCarousel(@Param("carouselParams")Map<String, Object> carouselParams);
+
+    List<MallCarousel> findCarouselByNUM(@Param("number") int number);
 }

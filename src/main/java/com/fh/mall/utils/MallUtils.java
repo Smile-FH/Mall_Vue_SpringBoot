@@ -4,7 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Description: TODO(这里用一句话描述这个类的作用)
+ * Description: 上传图片时用于得到服务器的URI
  * Author: HueFu
  * Date: 2020-8-22 22:12
  */

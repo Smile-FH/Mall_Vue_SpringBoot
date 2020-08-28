@@ -1,9 +1,10 @@
 package com.fh.mall.config;
 
 import com.fh.mall.interceptor.AdminLoginInterceptor;
-import com.fh.mall.utils.GetUploadPath;
+import com.fh.mall.utils.ConstantsValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -19,6 +20,10 @@ public class MallWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired
     private AdminLoginInterceptor adminLoginInterceptor;
 
+    /**
+     * admin登录拦截配置
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         /**
@@ -47,6 +52,19 @@ public class MallWebMvcConfigurer implements WebMvcConfigurer {
          * @Return: void
          */
         registry.addResourceHandler("/upload/**")
-                .addResourceLocations("file:"+GetUploadPath.uploadPath);
+                .addResourceLocations("file:"+ ConstantsValue.uploadPath);
     }
+
+    /**
+     * 跨域配置
+     *
+     * @param registry
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedOrigins("*")
+                .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowCredentials(true).maxAge(3600);
+    }
+
 }

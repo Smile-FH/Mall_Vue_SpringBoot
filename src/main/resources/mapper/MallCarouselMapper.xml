@@ -24,7 +24,7 @@
     </select>
     <select id="getPageCarousel" resultMap="BaseResultMap">
         select * from mall.mall_carousel
-        order by mall.mall_carousel.carousel_id asc
+        order by mall.mall_carousel.carousel_rank desc
         limit #{carouselPageParams.start, jdbcType=INTEGER}, #{carouselPageParams.limit, jdbcType=INTEGER}
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -159,5 +159,13 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="findCarouselByNUM" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall.mall_carousel
+        order by mall_carousel.carousel_rank desc
+        limit #{number}
+    </select>
 
 </mapper>

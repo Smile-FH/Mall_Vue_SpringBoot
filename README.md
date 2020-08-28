@@ -44,3 +44,5 @@ Result还有一个具体的实体类叫做ResultGenerate，封装类，响应码
 4. SpringBoot中过滤器、拦截器、aop的关系，及作用时间。
 5. SpringBoot中的生命周期
 6. Vue中的生命周期
+
+- [x] 接下来去写前端的轮播图展示

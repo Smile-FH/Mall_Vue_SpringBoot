@@ -11,24 +11,25 @@ import org.springframework.util.StringUtils;
 public class ResultGenerator {
 
     private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
-
     private static final String DEFAULT_FAIL_MESSAGE = "FAIL";
-
     private static final int RESULT_SUCCESS_CODE = 200;
-
     private static final int RESULT_FAIL_CODE = 500;
 
-    public static Result getSuccessResult(){
+    public static Result getSuccessResult(String message){
 //         我可以创建一个公用的result吗
         Result result = new Result();
         result.setResultCode(RESULT_SUCCESS_CODE);
-        result.setMessage(DEFAULT_SUCCESS_MESSAGE);
+        if (StringUtils.isEmpty(message)){
+            result.setMessage(DEFAULT_SUCCESS_MESSAGE);
+        } else {
+            result.setMessage(message);
+        }
         return result;
     }
 
-    public static Result<Object> getSuccessResult(Object data){
+    public static Result getSuccessResult(Object data){
 //         我可以创建一个公用的result吗
-        Result<Object> result = new Result<>();
+        Result result = new Result<>();
         result.setResultCode(RESULT_SUCCESS_CODE);
         result.setMessage(DEFAULT_SUCCESS_MESSAGE);
         result.setData(data);
