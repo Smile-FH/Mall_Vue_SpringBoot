@@ -1,5 +1,6 @@
 package com.fh.mall.controller.api.vo;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @Author: HueFu
  * Date: 2020-8-24 15:45
  */
+@ApiModel("Vue商城端首页数据对象")
 @Data
 public class IndexInfoVO implements Serializable {
 

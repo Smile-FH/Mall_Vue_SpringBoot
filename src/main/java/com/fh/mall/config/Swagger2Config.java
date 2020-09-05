@@ -1,14 +1,22 @@
 package com.fh.mall.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description: Swagger配置文件
@@ -17,6 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 @Configuration
 @EnableSwagger2
+@ComponentScan({"com.fh.mall.controller.admin","com.fh.mall.controller.api"})
 public class Swagger2Config {
     @Bean
     public Docket api(){
@@ -33,7 +42,20 @@ public class Swagger2Config {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.fh.mall.controller"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .securitySchemes(securitySchemes())
+                .securityContexts(securityContexts());
+    }
+
+    @Bean
+    public Docket docketDemo2() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.fh.mall.controller.admin"))
+                .paths(PathSelectors.any()) //正则匹配请求路径，并分配至当前分组
+                .build()
+                .groupName("demo2分组");   //分组名称;
     }
 
     private ApiInfo apiInfo() {
@@ -42,6 +64,7 @@ public class Swagger2Config {
          * @Author: HueFu
          * @Date: 2020-8-19 14:37
          * @MethodName: apiInfo
+         *
          * @Param: []
          * @Return: springfox.documentation.service.ApiInfo
          */
@@ -51,4 +74,28 @@ public class Swagger2Config {
                 .version("1.0")
                 .build();
     }
+
+    private List<ApiKey> securitySchemes() {
+        List apiKey = new ArrayList();
+        apiKey.add(new ApiKey("Authorization", "token", "header"));
+        return apiKey;
+    }
+
+    private List<SecurityContext> securityContexts() {
+        List<SecurityContext> securityContexts = new ArrayList<>();
+        securityContexts.add(SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.regex("^(?!login).*$")).build());
+        return securityContexts;
+    }
+
+    List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        List<SecurityReference> securityReferences=new ArrayList<>();
+        securityReferences.add(new SecurityReference("Authorization", authorizationScopes));
+        return securityReferences;
+    }
+
 }

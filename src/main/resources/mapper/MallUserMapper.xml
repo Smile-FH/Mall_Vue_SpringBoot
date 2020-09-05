@@ -15,30 +15,93 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        <!--@sql select -->user_id, nick_name, login_name, password_md5, is_deleted, create_time,
+        address, introduce_sign, locked_flag<!--@sql from mall.mall_user -->
+    </sql>
+
     <select id="queryAll" resultMap="user">
-        select * from mall.mall_user;
+        select *
+        from mall.mall_user;
     </select>
 
     <select id="getTotalUser" resultType="int">
-        select count(1) from mall.mall_user;
+        select count(1)
+        from mall.mall_user;
     </select>
 
     <select id="getPageUser" resultMap="user">
-        select * from mall.mall_user
+        select *
+        from mall.mall_user
         order by mall.mall_user.user_id asc
         limit #{pageParam.start, jdbcType=INTEGER}, #{pageParam.limit, jdbcType=INTEGER}
-#         想要在Mapper中使用，传过来的参数.变量时，必须在传参时用@Param注解标明
-#         不使用Map.变量名时，直接使用变量名 e.g.  # {pageParam}，
-#         在Mapper的注释中千万不要出现消息表达式符号，Mapper运行的时候注释中的消息表达式也会去正常执行，容易出现没有这个变量名，或者变量不能被设置的错误
+                # 想要在Mapper中使用，传过来的参数.变量时，必须在传参时用@Param注解标明
+                        # 不使用Map.变量名时，直接使用变量名 e.g. # {pageParam}，
+                        # 在Mapper的注释中千万不要出现消息表达式符号，Mapper运行的时候注释中的消息表达式也会去正常执行，容易出现没有这个变量名，或者变量不能被设置的错误
     </select>
 
     <update id="lockUser">
         update mall.mall_user
         set locked_flag = #{lockParams.lockStatus, jdbcType=INTEGER}
-        where user_id in
+                where user_id in
         <foreach collection="lockParams.ids" item="id" separator="," open="(" close=")">
             #{id}
         </foreach>
     </update>
 
+    <!--这种方式比较适合用来模糊查询-->
+    <select id="query" resultMap="user">
+        select
+        <include refid="Base_Column_List"/>
+        from mall.mall_admin_user
+        <where>
+            <if test="queryParam.adminUserId != null">
+                AND admin_user_id = #{queryParam.adminUserId, jdbcType=INTEGER}
+            </if>
+            <if test="queryParam.loginUserName != null">
+                AND login_user_name = #{queryParam.loginUserName, jdbcType=VARCHAR}
+            </if>
+            <if test="queryParam.loginPassword != null">
+                AND login_password = #{queryParam.loginPassword, jdbcType=VARCHAR}
+            </if>
+            <if test="queryParam.nickName != null">
+                AND nick_name = #{queryParam.nickName, jdbcType=VARCHAR}
+            </if>
+            <if test="queryParam.locked != null">
+                AND locked = #{queryParam.locked, jdbcType=TINYINT};
+            </if>
+        </where>
+    </select>
+    <delete id="deleteUser">
+    </delete>
+    <update id="updateUser">
+    </update>
+    <insert id="insertUser">
+    </insert>
+    <insert id="insert">
+    </insert>
+    <delete id="deleteByPrimaryKey">
+    </delete>
+    <insert id="insertSelective">
+    </insert>
+    <update id="updateBatch">
+    </update>
+    <update id="updateByPrimaryKey">
+    </update>
+    <update id="updateByPrimaryKeySelective">
+    </update>
+    <select id="selectByLoginNameAndPassword" resultMap="user">
+        select
+        <include refid="Base_Column_List"/>
+        from mall.mall_user
+        where login_name = #{loginName, jdbcType=VARCHAR}
+          and password_md5 = #{passwordMd5, jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPrimaryKey" resultMap="user">
+        select
+        <include refid="Base_Column_List"/>
+        from mall.mall_user
+        where user_id = #{userId, jdbcType=INTEGER}
+    </select>
 </mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fh.mall.dao.MallUserTokenMapper">
+    <resultMap id="BaseResultMap" type="com.fh.mall.entity.MallUserToken">
+        <!--@mbg.generated-->
+        <!--@Table mall_user_token-->
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="token" jdbcType="VARCHAR" property="token"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        user_id, token, update_time, expire_time
+    </sql>
+    <select id="selectByPrimaryToken" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from mall_user_token
+        where token = #{token,jdbcType=VARCHAR}
+    </select>
+    <insert id="insert" parameterType="com.fh.mall.entity.MallUserToken">
+        <!--@mbg.generated-->
+        insert into mall_user_token (user_id, token, update_time,
+                                     expire_time)
+        values (#{userId,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+                #{expireTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.fh.mall.entity.MallUserToken">
+        <!--@mbg.generated-->
+        update mall_user_token
+        set token       = #{token,jdbcType=VARCHAR},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            expire_time = #{expireTime,jdbcType=TIMESTAMP}
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update mall_user_token
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="token = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when user_id = #{item.userId,jdbcType=INTEGER} then #{item.token,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when user_id = #{item.userId,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="expire_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when user_id = #{item.userId,jdbcType=INTEGER} then #{item.expireTime,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+        </trim>
+        where user_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.userId,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from mall_user_token
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deletedByPrimaryKey">
+        delete
+        from mall_user_token
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+</mapper>

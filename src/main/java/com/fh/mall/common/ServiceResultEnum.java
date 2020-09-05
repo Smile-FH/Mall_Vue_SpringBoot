@@ -7,6 +7,32 @@ package com.fh.mall.common;
  */
 public enum ServiceResultEnum {
 
+
+    /**
+     * 登录的用户名不是手机号
+     */
+    LOGIN_NAME_IS_NOT_PHONE("登录的用户名不是手机号"),
+
+    /**
+     * 用户被管理员锁定，封禁
+     */
+    USER_LOCKED_ERROR("当前用户已被封"),
+
+    /**
+     * 没从数据库中查到响应用户
+     */
+    USER_NULL_ERROR("无效用户！请重新登录！"),
+
+    /**
+     * 未登录
+     */
+    USER_NOT_LOGIN("您还没有登录，请先登录!"),
+
+    /**
+     * Token过期
+     */
+    TOKEN_EXPIRE_ERROR("无效认证，请重新登录"),
+
     /**
      *  数据库操作失败
      */

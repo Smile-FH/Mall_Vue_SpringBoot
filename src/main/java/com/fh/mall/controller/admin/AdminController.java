@@ -3,6 +3,7 @@ package com.fh.mall.controller.admin;
 import com.fh.mall.common.ServiceResultEnum;
 import com.fh.mall.entity.AdminUser;
 import com.fh.mall.service.AdminUserService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -17,24 +18,28 @@ import javax.servlet.http.HttpSession;
  * @Date 2020-8-2 21:49
  */
 @Controller
+@Api(tags = {"管理员后台页面跳转，修改管理员数据，登录，登出接口"})
 @RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
     private AdminUserService adminUserService;
 
+    @ApiOperation(value = "后台首页跳转")
     @GetMapping("/index")
     public String index(HttpServletRequest request){
         request.setAttribute("path","index");
         return "admin/index";
     }
 
+    @ApiOperation(value = "后台分类页跳转")
     @GetMapping("/category")
     public String category(HttpServletRequest request){
         request.setAttribute("path","category");
         return "admin/category";
     }
 
+    @ApiOperation(value = "后台管理员个人信息页跳转")
     @GetMapping("/profile")
     public String profile(HttpServletRequest request){
         int loginUserId = (int)request.getSession().getAttribute("adminUserId");
@@ -47,7 +52,12 @@ public class AdminController {
         request.setAttribute("nickName",adminUserDetailByID.getNickName());
         return "admin/profile";
     }
-    
+
+    @ApiOperation(value = "后台管理员个人信息修改", notes = "account、password、nickname")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "account", value = "登录管理员的账号主体"),
+            @ApiImplicitParam(name = "oldPassword", value = "修改前的密码")
+    })
     @PostMapping("/profile/modify")
     @ResponseBody
     public String modify(
@@ -97,5 +107,44 @@ public class AdminController {
         session.removeAttribute("adminUserId");
         return "admin/login";
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return "admin/login";
+    }
+
+    @PostMapping("/login")
+    public String signin(
+            @RequestParam("loginUserName") String loginUserName,
+            @RequestParam("loginPassword") String loginPassword,
+            @RequestParam("verifyCode") String verifyCode,
+            HttpSession session){
+        if (StringUtils.isEmpty(verifyCode)){
+            session.setAttribute("errorMsg", "验证码不能为空");
+            return "redirect:/admin/login";
+        }
+
+        if (StringUtils.isEmpty(loginUserName) || StringUtils.isEmpty(loginPassword)){
+            session.setAttribute("errorMsg", "用户账户和密码不能为空");
+            return "redirect:/admin/login";
+        }
+        String kaptchaCode = session.getAttribute("verifyCode") + "";
+        if (StringUtils.isEmpty(kaptchaCode) || !verifyCode.equals(kaptchaCode)){
+            session.setAttribute("errorMsg", "验证码错误");
+            return "redirect:/admin/login";
+        }
+
+        AdminUser loginUser = adminUserService.login(loginUserName, loginPassword);
+
+        if (loginUser != null) {
+            session.setAttribute("nickName", loginUser.getNickName());
+            session.setAttribute("adminUserId", loginUser.getAdminUserId());
+            return "redirect:/admin/index";
+        } else {
+            session.setAttribute("errorMsg", "也许是你账号或密码错了趴！");
+        }
+        return "redirect:/admin/login";
+    }
+
 
 }

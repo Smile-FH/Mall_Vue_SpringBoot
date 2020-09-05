@@ -1,13 +1,17 @@
 package com.fh.mall.config;
 
+import com.fh.mall.config.handler.TokenToMallUserMethodArgumentResolver;
 import com.fh.mall.interceptor.AdminLoginInterceptor;
 import com.fh.mall.utils.ConstantsValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 /**
  * @Description: mvc intercept configuration
@@ -19,6 +23,14 @@ public class MallWebMvcConfigurer implements WebMvcConfigurer {
 
     @Autowired
     private AdminLoginInterceptor adminLoginInterceptor;
+
+    @Autowired
+    private TokenToMallUserMethodArgumentResolver tokenToMallUserMethodArgumentResolver;
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(tokenToMallUserMethodArgumentResolver);
+    }
 
     /**
      * admin登录拦截配置

@@ -17,7 +17,7 @@ public class ResultGenerator {
 
     public static Result getSuccessResult(String message){
 //         我可以创建一个公用的result吗
-        Result result = new Result();
+        Result result = new Result<>();
         result.setResultCode(RESULT_SUCCESS_CODE);
         if (StringUtils.isEmpty(message)){
             result.setMessage(DEFAULT_SUCCESS_MESSAGE);

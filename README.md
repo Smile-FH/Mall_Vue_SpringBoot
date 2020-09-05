@@ -46,3 +46,30 @@ Result还有一个具体的实体类叫做ResultGenerate，封装类，响应码
 6. Vue中的生命周期
 
 - [x] 接下来去写前端的轮播图展示
+
+2020年8月30日19点45分：  
+开始处理商城登录的后端逻辑
+1. 数据库添加测试数据
+2. 制作token
+3. [制作Token过程中的数字签名和数字证书是什么](http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html)
+4. [什么是摘要算法，摘要算法和加密算法的关系,摘要算法，数字签名，数字证书等的关系](https://www.jianshu.com/p/47a8498e47d0)
+5. [分层领域模型](https://juejin.im/post/6844903636334542856#heading-1)
+6. [为什么用自定义参数解析器？]()
+7. [spring mvc自定义参数解析器](https://blog.csdn.net/guanzhengyinqin/article/details/85255840)
+8. [什么是RESTful风格，他和传统的开发相比有什么不同，为啥出现了这种风格？](https://www.jianshu.com/p/91600da4df95)
+9. [简单了解RESTful风格下HTTP的响应码意义](https://www.jianshu.com/p/7893169a7c93)
+10. [Apache之HTTP协议,此部分还需要去详细了解一下才行](https://blog.51cto.com/shjia/1432670)
+11. [自定义注解的基本概念](https://blog.csdn.net/luckykapok918/article/details/79290109)
+12. [springBoot自定义注解,以及aop和自定义注解的使用](https://www.zhihu.com/question/24863332)
+13. 自定义注解参数含义  
+![自定义注解中的注解参数含义](src/main/resources/static/admin/plugins/flag-icon-css/flags/4x3/自定义注解中的注解参数含义.png)
+14. [RuntimeException和Exception的区别是啥？](https://zhuanlan.zhihu.com/p/47258269)
+15. [Swagger非全局、无需重复输入header参数配置](https://www.jianshu.com/p/6e5ee9dd5a61)
+16. [Swagger注解详解](https://blog.csdn.net/xiaojin21cen/article/details/78654652)
+17. Swagger的多模块配置方法1. 在配置文件中创建多个Docket。2. 根据源码自己写方法去 遍历目录，spring could项目的多模块配置可以瞅瞅
+18. [equals时候，变量放在前后的区别](https://blog.csdn.net/zhaoxiangjun_/article/details/77093294)
+19. [Spring Boot中使用Swagger2异常：Illegal DefaultValue 0 for parameter type integer](https://cloud.tencent.com/developer/article/1600539)
+20. [Swagger分组](https://blog.csdn.net/sinat_35626559/article/details/104920802)
+21. [SpringBoot全局异常处理](https://www.cnblogs.com/fishpro/p/spring-boot-study-throwable.html#_label2)
+22. [JS中location.hostname和location.host区别](http://www.5idev.com/p-javascript_location_hostname.shtml)
+23. [java中的正则Pattern和Matcher](https://blog.csdn.net/yin380697242/article/details/52049999)

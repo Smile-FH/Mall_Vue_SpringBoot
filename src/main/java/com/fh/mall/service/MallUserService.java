@@ -1,7 +1,10 @@
 package com.fh.mall.service;
 
+import com.fh.mall.entity.MallUser;
 import com.fh.mall.utils.PageQueryUtil;
 import com.fh.mall.utils.PageResult;
+
+import java.util.List;
 
 /**
  * @Description: MallUser业务层接口
@@ -40,4 +43,21 @@ public interface MallUserService {
     int lockUser(Integer[] ids, int lockStatus);
 
 
+    int deleteByPrimaryKey(Integer userId);
+
+    int insert(MallUser record);
+
+    int insertSelective(MallUser record);
+
+    MallUser selectByPrimaryKey(Integer userId);
+
+    int updateByPrimaryKeySelective(MallUser record);
+
+    int updateByPrimaryKey(MallUser record);
+
+    int updateBatch(List<MallUser> list);
+
+    String userLogin(String loginName, String passwordmd5);
+
+    Boolean userLogout(int loginId);
 }

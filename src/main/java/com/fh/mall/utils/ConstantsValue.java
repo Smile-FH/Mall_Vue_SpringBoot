@@ -16,6 +16,8 @@ public class ConstantsValue {
 
     public static int indexCarouselNumber;
 
+    public static int tokenLength;
+
     @Value("${upload.path}")
     public void setUploadPath(String uploadPath) {
         ConstantsValue.uploadPath = uploadPath;
@@ -26,5 +28,8 @@ public class ConstantsValue {
         ConstantsValue.indexCarouselNumber = indexCarouselNumber;
     }
 
-
+    @Value("${token.length}")
+    public void setTokenLength(int tokenLength) {
+        ConstantsValue.tokenLength = tokenLength;
+    }
 }
