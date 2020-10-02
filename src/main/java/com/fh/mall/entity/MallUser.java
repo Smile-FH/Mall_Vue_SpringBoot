@@ -7,7 +7,7 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * Description: TODO(这里用一句话描述这个类的作用)
+ * Description: 商城用户的DO实体类
  *
  * @Author: HueFu
  * @Date: 2020-8-30 22:44

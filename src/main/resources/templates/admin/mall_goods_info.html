@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/header::head-fragment"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <header th:replace="admin/header::header-fragment"></header>
+    <!--/*@thymesVar id="path" type=""*/-->
+    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+            </div>
+        </div>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">商品信息管理页</h3>
+                    </div> <!-- /.card-body -->
+                    <div class="card-body">
+
+                        <div class="row" style="border-top: none; padding: 0">
+                            <div class="col-sm-4">
+                                <!-- select -->
+                                <div class="form-group">
+                                    <label for="levelOne">group1</label>
+                                    <select class="custom-select" id="levelOne">
+                                        <th:block th:unless="${null == firstLevel}">
+                                            <th:block th:each="c : ${firstLevel}">
+                                                <option th:value="${c.categoryId}" th:text="${c.categoryName}"></option>
+                                            </th:block>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- select -->
+                                <div class="form-group">
+                                    <label>group2</label>
+                                    <select class="custom-select">
+                                        <th:block th:unless="${null == secondLevel}">
+                                            <th:block th:each="d : ${secondLevel}">
+                                                <option th:value="${d.categoryId}" th:text="${d.categoryName}"></option>
+                                            </th:block>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <!-- select -->
+                                <div class="form-group">
+                                    <label>group3</label>
+                                    <select class="custom-select">
+                                        <th:block th:unless="${null == thirdLevel}">
+                                            <th:block th:each="e : ${thirdLevel}">
+                                                <option th:value="${e.categoryId}" th:text="${e.categoryName}"></option>
+                                            </th:block>
+                                        </th:block>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="editor">内容：</label>
+                            <textarea id="editor" style="width: 700px;height: 450px"></textarea>
+                        </div>
+
+                        <button onclick="cli()">click</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/commonjs::commonjs-fragment"></div>
+<script th:src="@{/admin/plugins/kindeditor-4.1.12/kindeditor-all.js}"></script>
+<script th:src="@{/admin/plugins/kindeditor-4.1.12/lang/zh-CN.js}"></script>
+<script type="text/javascript" th:src="@{/admin/dist/js/mall_goods_info.js}"></script>
+</body>
+</html>

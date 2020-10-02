@@ -32,13 +32,6 @@ public class AdminController {
         return "admin/index";
     }
 
-    @ApiOperation(value = "后台分类页跳转")
-    @GetMapping("/category")
-    public String category(HttpServletRequest request){
-        request.setAttribute("path","category");
-        return "admin/category";
-    }
-
     @ApiOperation(value = "后台管理员个人信息页跳转")
     @GetMapping("/profile")
     public String profile(HttpServletRequest request){

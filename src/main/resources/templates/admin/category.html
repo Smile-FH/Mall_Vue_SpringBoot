@@ -1,36 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="admin/header::head-fragment"></head>
-<body>
-<header th:replace="admin/header::header-fragment"></header>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <header th:replace="admin/header::header-fragment"></header>
+    <!--/*@thymesVar id="path" type="java"*/-->
+    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
 
-<div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <!--/*@thymesVar id="categoryLevel" type="java"*/-->
+                <input type="hidden" th:value="${categoryLevel}" id="categoryLevel">
+                <!--/*@thymesVar id="parentId" type="java"*/-->
+                <input type="hidden" th:value="${parentId}" id="parentId">
+                <!--/*@thymesVar id="backParentId" type="java"*/-->
+                <input type="hidden" th:value="${backParentId}" id="backParentId">
+            </div>
         </div>
-    </div>
-    <div class="content">
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                <h3 class="card-title">Category</h3>
-            </div> <!-- /.card-body -->
-            <div class="card-body">
-                <div class="panel panel-default">
-                    <div style="padding: 10px 0 20px 10px;">
-                        页面布局制作及跳转逻辑Category
+        <div class="content">
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <h3 class="card-title">分类管理</h3>
+                        </div> <!-- /.card-body -->
+                        <div class="card-body">
+                            <div class="grid-btn">
+                                <button class="btn btn-info" onclick="addGoodsCategory()"><i
+                                        class="fa fa-plus"></i>&nbsp;添加
+                                </button>
+                                <button class="btn btn-warning" onclick="editCategoryInfo()"><i
+                                        class="fa fa-trash-o"></i>&nbsp;修改
+                                </button>
+                                <button class="btn btn-danger" onclick=""><i
+                                        class="fa fa-trash-o"></i> 删除
+                                </button>
+                                <button class="btn btn-info" onclick="nextLevel()"><i
+                                        class="fa fa-trash-o"></i> 子级分类
+                                </button>
+                                <button class="btn btn-info" onclick="upLevel()"><i
+                                        class="fa fa-trash-o"></i> 父级分类
+                                </button>
+                            </div>
+                            <div class="panel panel-default">
+                                <table id="jqGrid"></table>
+                                <div id="jqGridPager"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div th:replace="admin/footer::footer-fragment"></div>
 </div>
-
-
-<div th:replace="admin/footer::footer-fragment"></div>
-
 <div th:replace="admin/commonjs::commonjs-fragment"></div>
-
+<script type="text/javascript" th:src="@{/admin/dist/js/mallgoodscategory.js}"></script>
 </body>
 </html>

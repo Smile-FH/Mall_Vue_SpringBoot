@@ -4,7 +4,7 @@ import com.fh.mall.entity.MallUser;import org.apache.ibatis.annotations.Param;
 import java.util.List;import java.util.Map;
 
 /**
- * Description: TODO(商城用户持久层接口)
+ * Description: 商城用户持久层接口
  *
  * @Author: HueFu
  * @Date: 2020-8-30 22:44

@@ -73,3 +73,21 @@ Result还有一个具体的实体类叫做ResultGenerate，封装类，响应码
 21. [SpringBoot全局异常处理](https://www.cnblogs.com/fishpro/p/spring-boot-study-throwable.html#_label2)
 22. [JS中location.hostname和location.host区别](http://www.5idev.com/p-javascript_location_hostname.shtml)
 23. [java中的正则Pattern和Matcher](https://blog.csdn.net/yin380697242/article/details/52049999)
+
+2020年9月5日20点27分：  
+前台login模块已经开发完毕，接下来就开始写classify分类模块
+
+2020年9月25日22点17分：  
+最近因为开发别的项目有点耽误，今天开始搞起来，  
+先来记录一个问题
+1. [window.location得到的信息问题](https://www.cnblogs.com/zhabayi/p/6419938.html)
+![window.location](src/main/resources/static/admin/plugins/flag-icon-css/flags/4x3/image.png)
+2. [js 截取字符问题](https://www.jb51.net/article/42482.htm)
+3. [jQuery中的ajax](https://www.cnblogs.com/tylerdonet/p/3520862.html)
+
+2020年9月28日08点01分：  
+在开发中发现一个问题，查询到的数据总页数有点不对劲，后面再说吧
+
+2020年10月1日15点26分：
+1. [jQuery中监听事件一般都是用on来监听]()
+2. 

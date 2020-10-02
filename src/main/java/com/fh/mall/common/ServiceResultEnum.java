@@ -1,7 +1,7 @@
 package com.fh.mall.common;
 
 /**
- * @Description: TODO(枚举全局返回信息，目前只有SUCCESS和DB_ERROR)
+ * @Description: 枚举全局返回信息
  * @Author HueFu
  * @Date 2020-8-10 20:52
  */

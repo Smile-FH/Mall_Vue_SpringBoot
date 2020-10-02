@@ -1,5 +1,6 @@
 package com.fh.mall.service;
 
+import com.fh.mall.controller.api.param.MallUserEditParams;
 import com.fh.mall.entity.MallUser;
 import com.fh.mall.utils.PageQueryUtil;
 import com.fh.mall.utils.PageResult;
@@ -51,7 +52,7 @@ public interface MallUserService {
 
     MallUser selectByPrimaryKey(Integer userId);
 
-    int updateByPrimaryKeySelective(MallUser record);
+    boolean updateUserInfo(MallUserEditParams mallUserEditParams, int userId);
 
     int updateByPrimaryKey(MallUser record);
 

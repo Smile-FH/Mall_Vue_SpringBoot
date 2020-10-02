@@ -6,22 +6,8 @@ $(function () {
             { label: 'id', name: 'userId', index: 'userId', width: 50, key: true, hidden: true },
             { label: '昵称', name: 'nickName', index: 'nickName', width: 80 },
             { label: '登录名', name: 'loginName', index: 'loginName', width: 100 },
-            {
-                label: '身份状态',
-                name: 'lockedFlag',
-                index: 'lockedFlag',
-                width: 60,
-                align: 'center',
-                formatter: lockedFormatter
-            },
-            {
-                label: '是否注销',
-                name: 'isDeleted',
-                index: 'isDeleted',
-                width: 60,
-                align: 'center',
-                formatter: deleteFormatter
-            },
+            { label: '身份状态', name: 'lockedFlag', index: 'lockedFlag', width: 60, align: 'center', formatter: lockedFormatter },
+            { label: '是否注销', name: 'isDeleted', index: 'isDeleted', width: 60, align: 'center', formatter: deleteFormatter },
             { label: '注册时间', name: 'createTime', index: 'createTime', width: 120 }
         ],
         height: 450,
@@ -109,7 +95,7 @@ function lockUser(lockStatus) {
                             icon: "success",
                             title: "返回信息",
                             text: "Perfect, 删除成功了啊！"
-                        }).then(result=>{
+                        }).then(result => {
                             if (result) {
                                 reload();
                             }

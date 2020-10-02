@@ -89,7 +89,36 @@
     </update>
     <update id="updateByPrimaryKey">
     </update>
-    <update id="updateByPrimaryKeySelective">
+    <update id="updateByPrimaryKeySelective" parameterType="com.fh.mall.entity.MallUser">
+        <!--@mbg.generated-->
+        update mall.mall_user
+        <set>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName, jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null and loginName != ''">
+                login_name = #{loginName, jdbcType=VARCHAR},
+            </if>
+            <if test="passwordMd5 != null and passwordMd5 != ''">
+                password_md5 = #{passwordMd5, jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted, jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="introduceSign != null and introduceSign != ''">
+                introduce_sign = #{introduceSign, jdbcType=INTEGER},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address, jdbcType=VARCHAR},
+            </if>
+            <if test="lockedFlag != null and lockedFlag != ''">
+                locked_flag = #{lockedFlag, jdbcType=INTEGER},
+            </if>
+        </set>
+        where user_id = #{userId, jdbcType=INTEGER}
     </update>
     <select id="selectByLoginNameAndPassword" resultMap="user">
         select

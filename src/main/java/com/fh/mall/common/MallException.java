@@ -8,6 +8,7 @@ package com.fh.mall.common;
  */
 public class MallException extends RuntimeException {
     public MallException() {
+        super();
     }
 
     public MallException(String message) {

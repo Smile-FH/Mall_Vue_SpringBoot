@@ -25,8 +25,8 @@ import java.util.List;
  */
 @Configuration
 @EnableSwagger2
-@ComponentScan({"com.fh.mall.controller.admin","com.fh.mall.controller.api"})
 public class Swagger2Config {
+
     @Bean
     public Docket api(){
         /**
@@ -40,9 +40,10 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.fh.mall.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.fh.mall.controller.api"))
                 .paths(PathSelectors.any())
                 .build()
+                .groupName("商城前台接口")
                 .securitySchemes(securitySchemes())
                 .securityContexts(securityContexts());
     }
@@ -55,7 +56,7 @@ public class Swagger2Config {
                 .apis(RequestHandlerSelectors.basePackage("com.fh.mall.controller.admin"))
                 .paths(PathSelectors.any()) //正则匹配请求路径，并分配至当前分组
                 .build()
-                .groupName("demo2分组");   //分组名称;
+                .groupName("商城后台接口");   //分组名称;
     }
 
     private ApiInfo apiInfo() {

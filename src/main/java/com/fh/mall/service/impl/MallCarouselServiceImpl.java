@@ -62,7 +62,7 @@ public class MallCarouselServiceImpl implements MallCarouselService {
     public PageResult getPageCarousel(PageQueryUtil pageQueryUtil) {
         List<MallCarousel> mallCarousels = mallCarouselMapper.getPageCarousel(pageQueryUtil);
         int totalCarousel = mallCarouselMapper.getTotalCarousel();
-        return new PageResult(totalCarousel, mallCarousels, pageQueryUtil.getLimit(), pageQueryUtil.getCurrentPage());
+        return new PageResult(totalCarousel, mallCarousels, pageQueryUtil.getLimit(), pageQueryUtil.getPage());
     }
 
     @Override

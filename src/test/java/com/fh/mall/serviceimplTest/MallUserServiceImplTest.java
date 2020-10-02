@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: MallUserServiceImplTest商城用户测试类
  * @Author HueFu
  * @Date 2020-8-11 15:05
  */

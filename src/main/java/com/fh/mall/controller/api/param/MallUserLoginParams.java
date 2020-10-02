@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * Description: TODO(这里用一句话描述这个类的作用)
+ * Description: 商城用户登录时所需的参数Param
  *
  * @Author: HueFu
  * @Date: 2020-9-5 9:36

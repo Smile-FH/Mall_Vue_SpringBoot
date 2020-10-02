@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Description: TODO(vue端商城主页展示数据的View Object)
+ * Description: vue端商城主页展示数据的View Object
  * @Author: HueFu
  * Date: 2020-8-24 15:45
  */

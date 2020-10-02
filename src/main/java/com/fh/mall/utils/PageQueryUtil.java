@@ -13,18 +13,17 @@ import java.util.Map;
 @Data
 public class PageQueryUtil extends LinkedHashMap<String, Object> {
 
-    private int currentPage;
+    private int page;
 
     private int limit;
 
     public PageQueryUtil(Map<String, Object> params) {
         // 合并两个Map，如果有相同的key那么，后边的key可以覆盖前边的
         this.putAll(params);
-
-        this.currentPage = Integer.parseInt(params.get("page").toString());
+        this.page = Integer.parseInt(params.get("page").toString());
         this.limit = Integer.parseInt(params.get("limit").toString());
-        this.put("start",(currentPage-1)*limit);
-        this.put("currentPage",currentPage);
+        this.put("start",( page - 1 )*limit);
+        this.put("page",page);
         this.put("limit",limit);
     }
 }

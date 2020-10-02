@@ -3,7 +3,7 @@ package com.fh.mall.service;
 import java.util.List;
 import com.fh.mall.entity.MallUserToken;
     /** 
- * Description: TODO(这里用一句话描述这个类的作用) 
+ * Description: MallUserTokenService,Token操作业务层接口
  * @Author: HueFu
  * @Date: 2020-8-31 9:15 
  */

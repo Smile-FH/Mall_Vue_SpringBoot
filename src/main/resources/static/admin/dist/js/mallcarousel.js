@@ -35,7 +35,7 @@ $(function () {
             rows: "limit",
             order: "order"
         },
-        gridComplete: function () {
+        gridComplete: function gridComplete() {
             //隐藏grid底部滚动条
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x": "hidden" });
         }
@@ -62,12 +62,15 @@ function addCarousel() {
             input: 'file',
             title: '上传轮播图',
             inputValidator: file => {
+                let suffix;
+                let suffixIndex;
+                let fileName;
                 if (!file) {
                     return "请选择上传图片";
                 }
-                let fileName = file.name;
-                let suffixIndex = fileName.lastIndexOf(".");
-                var suffix = fileName.substr(suffixIndex + 1);
+                fileName = file.name;
+                suffixIndex = fileName.lastIndexOf(".");
+                suffix = fileName.substr(suffixIndex + 1);
                 if (!/^(jpg|jpeg|png|gif)$/.test(suffix)) {
                     // alert('只支持jpg、png、gif格式的文件！');
                     return "只支持jpg、png、gif格式的文件！";
@@ -96,10 +99,12 @@ function addCarousel() {
             }
         }
     ]).then((result) => {
+        let carouselRank;
+        let redirectUrl;
         let formData = new FormData();
         formData.append("file", result.value[0]);
-        let redirectUrl = result.value[1];
-        let carouselRank = result.value[2];
+        redirectUrl = result.value[1];
+        carouselRank = result.value[2];
         $.ajax({
             type: "POST",
             url: "/upload/file",
@@ -107,8 +112,8 @@ function addCarousel() {
             cache: false,
             contentType: false,
             processData: false,
-            success: (result)=>{
-                if (result.resultCode === 200 ){
+            success: result => {
+                if (200 === result.resultCode ){
                     let map = {
                         carouselUrl: result.data,
                         redirectUrl: redirectUrl,
@@ -122,7 +127,7 @@ function addCarousel() {
                         contentType: "application/json",
                         data:data,
                         success: result=>{
-                            if (result.resultCode === 200) {
+                            if (200 === result.resultCode) {
                                 Swal.fire({
                                     icon: "success",
                                     text: "亲，你添加成功了诶！"
@@ -142,7 +147,7 @@ function addCarousel() {
 
 function delCarousel() {
     let ids = $("#jqGrid").jqGrid('getGridParam', 'selarrrow');
-    if (ids.length === 0) {
+    if (0 === ids.length) {
         return;
     }
     Swal.fire({
@@ -213,12 +218,13 @@ function updateCarousel() {
                 let result = Number(value);
                 if (!result) {
                     return "排序值只能是数字偶！";
-                } else if (result>999999) {
+                } else if (999999 < result) {
                     return "排序值数字只能是六位以下偶！"
                 }
             }
         }
     ]).then((result) => {
+        let answers;
         let map = {
             redirectUrl: result.value[0],
             carouselRank: result.value[1],
@@ -226,13 +232,13 @@ function updateCarousel() {
             updateTime: time()
         };
         if (result.value) {
-            let answers = JSON.stringify(map);
+            answers = JSON.stringify(map);
             $.ajax({
                 type: "post",
                 url: "/admin/carousel/update",
                 contentType: "application/json",
                 data: answers,
-                success: result => {
+                success: result=> {
                     if (result.resultCode === 200) {
                         Swal.fire({
                             icon: "success",

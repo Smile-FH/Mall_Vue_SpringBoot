@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @Description: TODO(这里用一句话描述这个类的作用)
+ * @Description: 管理员用户测试类
  * @Author HueFu
  * @Date 2020-8-12 8:50
  */

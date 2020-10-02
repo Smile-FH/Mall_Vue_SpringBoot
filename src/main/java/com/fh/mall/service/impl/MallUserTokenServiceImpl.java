@@ -7,7 +7,7 @@ import java.util.List;
 import com.fh.mall.entity.MallUserToken;
 import com.fh.mall.service.MallUserTokenService;
 /** 
- * Description: TODO(这里用一句话描述这个类的作用) 
+ * Description: Token操作实现类
  * @Author: HueFu
  * @Date: 2020-8-31 9:15 
  */

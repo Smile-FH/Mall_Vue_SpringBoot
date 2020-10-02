@@ -1,6 +1,7 @@
 package com.fh.mall.service.impl;
 
 import com.fh.mall.common.ServiceResultEnum;
+import com.fh.mall.controller.api.param.MallUserEditParams;
 import com.fh.mall.dao.MallUserMapper;
 import com.fh.mall.dao.MallUserTokenMapper;
 import com.fh.mall.entity.MallUser;
@@ -95,7 +96,7 @@ public class MallUserServiceImpl implements MallUserService {
     public PageResult getListMallUser(PageQueryUtil pageQueryUtil) {
         List<MallUser> pageUser = mallUserMapper.getPageUser(pageQueryUtil);
         int totalUser = mallUserMapper.getTotalUser();
-        return new PageResult(totalUser, pageUser, pageQueryUtil.getLimit(), pageQueryUtil.getCurrentPage());
+        return new PageResult(totalUser, pageUser, pageQueryUtil.getLimit(), pageQueryUtil.getPage());
     }
 
     @Override
@@ -128,9 +129,15 @@ public class MallUserServiceImpl implements MallUserService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(MallUser record) {
-        return mallUserMapper.updateByPrimaryKeySelective(record);
+    public boolean updateUserInfo(MallUserEditParams mallUserEditParams, int userId) {
+        MallUser record = new MallUser();
+        record.setUserId(userId);
+        record.setNickName(mallUserEditParams.getNickName());
+        record.setIntroduceSign(mallUserEditParams.getIntroduceSign());
+        record.setPasswordMd5(mallUserEditParams.getNewPassword());
+        return mallUserMapper.updateByPrimaryKeySelective(record)>0;
     }
+
 
     @Override
     public int updateByPrimaryKey(MallUser record) {

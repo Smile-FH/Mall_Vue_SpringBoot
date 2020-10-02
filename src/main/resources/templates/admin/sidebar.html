@@ -5,7 +5,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
         <img th:src="@{/admin/dist/img/AdminLTELogo.png}" alt="AdminLTE Logo"
-             class="brand-image img-circle elevation-3" style="opacity: .8">
+             class="brand-image img-circle elevation-3" style="opacity: .8" src="">
         <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
@@ -13,6 +13,7 @@
     <div class="sidebar">
 
         <nav class="mt-2">
+
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">首页管理</li>
                 <!-- Add icons to the links using the .nav-icon class
@@ -25,7 +26,20 @@
                         </p>
                     </a>
                 </li>
+            </ul>
 
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-header">商品管理</li>
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview menu-open">
+                    <a th:href="@{/admin/goods}" th:class="${path}=='goods'?'nav-link active':'nav-link'">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            商品信息管理
+                        </p>
+                    </a>
+                </li>
             </ul>
 
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -40,10 +54,19 @@
                         </p>
                     </a>
                 </li>
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item has-treeview menu-open">
+                    <a th:class="${path}=='category'?'nav-link active':'nav-link'"
+                       th:href="@{/admin/category(parentId=0, categoryLevel=1, backParentId=0)}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            分类管理
+                        </p>
+                    </a>
+                </li>
 
-            </ul>
 
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-header">系统管理</li>
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
@@ -57,7 +80,7 @@
                 </li>
 
                 <li class="nav-item has-treeview menu-open">
-                    <a th:href="@{/admin/logout}" th:class="${path}=='category'?'nav-link active':'nav-link'">
+                    <a th:href="@{/admin/logout}" th:class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             安全退出
@@ -65,6 +88,7 @@
                     </a>
                 </li>
             </ul>
+
         </nav>
     </div>
 </aside>

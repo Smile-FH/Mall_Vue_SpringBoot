@@ -2,6 +2,7 @@ package com.fh.mall.controller.api;
 
 import com.fh.mall.common.ServiceResultEnum;
 import com.fh.mall.config.annotation.TokenToMallUser;
+import com.fh.mall.controller.api.param.MallUserEditParams;
 import com.fh.mall.controller.api.param.MallUserLoginParams;
 import com.fh.mall.entity.MallUser;
 import com.fh.mall.service.MallUserService;
@@ -18,7 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.validation.Valid;
 
 /**
- * Description: TODO(Vue商城用户功能接口)
+ * Description: Vue商城用户功能控制层
  *
  * @Author: HueFu
  * @Date: 2020-8-30 19:50
@@ -67,6 +68,21 @@ public class MallUserAPI {
     @GetMapping("/user")
     public Result userInfo(@TokenToMallUser @ApiIgnore MallUser mallUser){
         return ResultGenerator.getSuccessResult(mallUser);
+    }
+
+    @ApiOperation(value = "修改用户的密码，昵称，个签信息")
+    @PutMapping("/user")
+    public Result editInfo(
+            @TokenToMallUser @ApiIgnore MallUser mallUser,
+            @RequestBody @Valid MallUserEditParams mallUserEditParams
+    ){
+        System.out.println(mallUserEditParams.toString());
+        boolean updateUserInfo = mallUserService.updateUserInfo(mallUserEditParams, mallUser.getUserId());
+        System.out.println(updateUserInfo);
+        if (updateUserInfo) {
+            return ResultGenerator.getSuccessResult("");
+        }
+        return ResultGenerator.getFailResult("修改失败请稍后再试！");
     }
 
 

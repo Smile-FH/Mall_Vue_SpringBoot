@@ -6,20 +6,24 @@ import com.fh.mall.service.MallCarouselService;
 import com.fh.mall.utils.PageQueryUtil;
 import com.fh.mall.utils.Result;
 import com.fh.mall.utils.ResultGenerator;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * @Description: TODO(轮播图后台管理页控制层)
+ * @Description: 轮播图后台管理页控制层
  * @Author HueFu
  * @Date 2020-8-18 9:43
  */
+@Api(tags = "后台轮播图管理接口")
 @Controller
 @RequestMapping("/admin")
 public class MallCarouselController {
@@ -27,19 +31,22 @@ public class MallCarouselController {
     @Autowired
     private MallCarouselService mallCarouselService;
 
+    @ApiIgnore
     @GetMapping("/carousels")
     public String carousePage(HttpServletRequest request){
         request.setAttribute("path", "carousels");
         return "admin/mall_carousels";
     }
 
+    @ApiOperation(value = "轮播图分页查询列表")
     @GetMapping("/carousels/list")
     @ResponseBody
     public Result carouselList(@RequestParam Map<String, Object> params){
         PageQueryUtil pageQueryUtil = new PageQueryUtil(params);
         return ResultGenerator.getSuccessResult(mallCarouselService.getPageCarousel(pageQueryUtil));
     }
-    
+
+    @ApiOperation(value = "添加轮播图接口")
     @PostMapping("/carousel/save")
     @ResponseBody
     public Result saveCarousel(@RequestBody MallCarousel mallCarousel){
@@ -55,6 +62,7 @@ public class MallCarouselController {
         return ResultGenerator.getFailResult(message);
     }
 
+    @ApiOperation(value = "轮播图删除接口", notes = "后期得改成软删除啊，现在还是硬删除！")
     @PostMapping("/carousel/deleted")
     @ResponseBody
     public Result delCarousel(@RequestBody Integer[] ids){
@@ -65,6 +73,7 @@ public class MallCarouselController {
         return ResultGenerator.getSuccessResult(i);
     }
 
+    @ApiOperation(value = "修改轮播图接口")
     @PostMapping("/carousel/update")
     @ResponseBody
     public Result update(@RequestBody MallCarousel mallCarousel) {

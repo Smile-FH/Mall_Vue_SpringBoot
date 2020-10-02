@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /** 
- * @Description: TODO(轮播图持久层 5. 批量删除轮播图)
+ * @Description: 后台管理轮播图持久层
  *
  *      1. 轮播图的分页列表，
  *      2. 添加轮播图，
