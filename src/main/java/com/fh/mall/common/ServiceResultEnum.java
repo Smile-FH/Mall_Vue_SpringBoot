@@ -7,7 +7,6 @@ package com.fh.mall.common;
  */
 public enum ServiceResultEnum {
 
-
     /**
      * 登录的用户名不是手机号
      */

@@ -90,4 +90,11 @@ Result还有一个具体的实体类叫做ResultGenerate，封装类，响应码
 
 2020年10月1日15点26分：
 1. [jQuery中监听事件一般都是用on来监听]()
-2. 
+
+2020年10月3日09点21分：
+1. [Jquery中报错 Cannot read property 'toLowerCase' of undefined，  
+一般是使用`$(name)`时传name值错了)](https://qiita.com/BRSF/items/4f4e39bd82778b976392)
+2. [Java注解中的属性动态赋值问题：代码质量优化]()
+3. [数据库建表时先建一个只有字段名的空表，然后在空表的基础上去改]()
+4. [Law Of Demeter(最少知识原则) Wiki](https://en.wikipedia.org/wiki/Law_of_Demeter)
+5. [Java Law Of Demeter Java Examples](https://alvinalexander.com/java/java-law-of-demeter-java-examples/#:~:text=The%20Law%20of%20Demeter%20for%20functions%20requires%20that,in%20the%20scope%20of%20M.%20Head%20First%20Java.)

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fh.mall.dao.MallGoodsInfoMapper">
+  <resultMap id="BaseResultMap" type="com.fh.mall.entity.MallGoodsInfo">
+    <!--@mbg.generated-->
+    <!--@Table mall_goods_info-->
+    <id column="good_id" jdbcType="INTEGER" property="goodId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="good_name" jdbcType="VARCHAR" property="goodName" />
+    <result column="good_brief" jdbcType="VARCHAR" property="goodBrief" />
+    <result column="good_tag" jdbcType="VARCHAR" property="goodTag" />
+    <result column="good_main_image" jdbcType="VARCHAR" property="goodMainImage" />
+    <result column="good_carousel" jdbcType="VARCHAR" property="goodCarousel" />
+    <result column="good_detail_content" jdbcType="LONGVARCHAR" property="goodDetailContent" />
+    <result column="original_price" jdbcType="INTEGER" property="originalPrice" />
+    <result column="shell_price" jdbcType="INTEGER" property="shellPrice" />
+    <result column="good_inventory" jdbcType="INTEGER" property="goodInventory" />
+    <result column="is_shelves" jdbcType="TINYINT" property="isShelves" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_id" jdbcType="INTEGER" property="createId" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_id" jdbcType="INTEGER" property="updateId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    good_id, category_id, good_name, good_brief, good_tag, good_main_image, good_carousel, 
+    good_detail_content, original_price, shell_price, good_inventory, is_shelves, create_time, 
+    create_id, update_time, update_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from mall_goods_info
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from mall_goods_info
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="good_id" keyProperty="goodId" parameterType="com.fh.mall.entity.MallGoodsInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mall_goods_info (category_id, good_name, good_brief, 
+      good_tag, good_main_image, good_carousel, 
+      good_detail_content, original_price, shell_price, 
+      good_inventory, is_shelves, create_time, 
+      create_id, update_time, update_id
+      )
+    values (#{categoryId,jdbcType=INTEGER}, #{goodName,jdbcType=VARCHAR}, #{goodBrief,jdbcType=VARCHAR}, 
+      #{goodTag,jdbcType=VARCHAR}, #{goodMainImage,jdbcType=VARCHAR}, #{goodCarousel,jdbcType=VARCHAR}, 
+      #{goodDetailContent,jdbcType=LONGVARCHAR}, #{originalPrice,jdbcType=INTEGER}, #{shellPrice,jdbcType=INTEGER}, 
+      #{goodInventory,jdbcType=INTEGER}, #{isShelves,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="good_id" keyProperty="goodId" parameterType="com.fh.mall.entity.MallGoodsInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into mall_goods_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="goodName != null">
+        good_name,
+      </if>
+      <if test="goodBrief != null">
+        good_brief,
+      </if>
+      <if test="goodTag != null">
+        good_tag,
+      </if>
+      <if test="goodMainImage != null">
+        good_main_image,
+      </if>
+      <if test="goodCarousel != null">
+        good_carousel,
+      </if>
+      <if test="goodDetailContent != null">
+        good_detail_content,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="shellPrice != null">
+        shell_price,
+      </if>
+      <if test="goodInventory != null">
+        good_inventory,
+      </if>
+      <if test="isShelves != null">
+        is_shelves,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createId != null">
+        create_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateId != null">
+        update_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="goodName != null">
+        #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodBrief != null">
+        #{goodBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="goodTag != null">
+        #{goodTag,jdbcType=VARCHAR},
+      </if>
+      <if test="goodMainImage != null">
+        #{goodMainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="goodCarousel != null">
+        #{goodCarousel,jdbcType=VARCHAR},
+      </if>
+      <if test="goodDetailContent != null">
+        #{goodDetailContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="shellPrice != null">
+        #{shellPrice,jdbcType=INTEGER},
+      </if>
+      <if test="goodInventory != null">
+        #{goodInventory,jdbcType=INTEGER},
+      </if>
+      <if test="isShelves != null">
+        #{isShelves,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null">
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        #{updateId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fh.mall.entity.MallGoodsInfo">
+    <!--@mbg.generated-->
+    update mall_goods_info
+    <set>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="goodName != null">
+        good_name = #{goodName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodBrief != null">
+        good_brief = #{goodBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="goodTag != null">
+        good_tag = #{goodTag,jdbcType=VARCHAR},
+      </if>
+      <if test="goodMainImage != null">
+        good_main_image = #{goodMainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="goodCarousel != null">
+        good_carousel = #{goodCarousel,jdbcType=VARCHAR},
+      </if>
+      <if test="goodDetailContent != null">
+        good_detail_content = #{goodDetailContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="shellPrice != null">
+        shell_price = #{shellPrice,jdbcType=INTEGER},
+      </if>
+      <if test="goodInventory != null">
+        good_inventory = #{goodInventory,jdbcType=INTEGER},
+      </if>
+      <if test="isShelves != null">
+        is_shelves = #{isShelves,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null">
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateId != null">
+        update_id = #{updateId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fh.mall.entity.MallGoodsInfo">
+    <!--@mbg.generated-->
+    update mall_goods_info
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      good_name = #{goodName,jdbcType=VARCHAR},
+      good_brief = #{goodBrief,jdbcType=VARCHAR},
+      good_tag = #{goodTag,jdbcType=VARCHAR},
+      good_main_image = #{goodMainImage,jdbcType=VARCHAR},
+      good_carousel = #{goodCarousel,jdbcType=VARCHAR},
+      good_detail_content = #{goodDetailContent,jdbcType=LONGVARCHAR},
+      original_price = #{originalPrice,jdbcType=INTEGER},
+      shell_price = #{shellPrice,jdbcType=INTEGER},
+      good_inventory = #{goodInventory,jdbcType=INTEGER},
+      is_shelves = #{isShelves,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_id = #{createId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_id = #{updateId,jdbcType=INTEGER}
+    where good_id = #{goodId,jdbcType=INTEGER}
+  </update>
+</mapper>

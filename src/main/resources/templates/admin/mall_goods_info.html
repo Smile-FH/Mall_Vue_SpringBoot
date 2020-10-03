@@ -24,8 +24,8 @@
                             <div class="col-sm-4">
                                 <!-- select -->
                                 <div class="form-group">
-                                    <label for="levelOne">group1</label>
-                                    <select class="custom-select" id="levelOne">
+                                    <label for="levelOne">一级分类</label>
+                                    <select class="custom-select" id="levelOne" onchange="getList('#levelOne')">
                                         <th:block th:unless="${null == firstLevel}">
                                             <th:block th:each="c : ${firstLevel}">
                                                 <option th:value="${c.categoryId}" th:text="${c.categoryName}"></option>
@@ -37,8 +37,8 @@
                             <div class="col-sm-4">
                                 <!-- select -->
                                 <div class="form-group">
-                                    <label>group2</label>
-                                    <select class="custom-select">
+                                    <label for="levelTwo">二级分类</label>
+                                    <select class="custom-select" id="levelTwo" onchange="getList('#levelTwo')">
                                         <th:block th:unless="${null == secondLevel}">
                                             <th:block th:each="d : ${secondLevel}">
                                                 <option th:value="${d.categoryId}" th:text="${d.categoryName}"></option>
@@ -50,8 +50,8 @@
                             <div class="col-sm-4">
                                 <!-- select -->
                                 <div class="form-group">
-                                    <label>group3</label>
-                                    <select class="custom-select">
+                                    <label for="levelThree">三级分类</label>
+                                    <select class="custom-select" id="levelThree">
                                         <th:block th:unless="${null == thirdLevel}">
                                             <th:block th:each="e : ${thirdLevel}">
                                                 <option th:value="${e.categoryId}" th:text="${e.categoryName}"></option>
@@ -66,8 +66,6 @@
                             <label for="editor">内容：</label>
                             <textarea id="editor" style="width: 700px;height: 450px"></textarea>
                         </div>
-
-                        <button onclick="cli()">click</button>
                     </div>
                 </div>
             </div>

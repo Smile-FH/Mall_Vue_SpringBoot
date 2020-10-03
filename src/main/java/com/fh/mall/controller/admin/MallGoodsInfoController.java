@@ -1,12 +1,12 @@
 package com.fh.mall.controller.admin;
 
+import com.fh.mall.common.MallCategoryLevelEnum;
 import com.fh.mall.entity.MallGoodsCategory;
 import com.fh.mall.service.MallGoodsCategoryService;
 import com.fh.mall.utils.Result;
 import com.fh.mall.utils.ResultGenerator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -23,36 +23,40 @@ import java.util.Map;
  * @Author: HueFu
  * @Date: 2020-09-28 08:48
  */
-@Api(tags = "商品信息编辑页")
+@Api(tags = "商城物品信息编辑")
 @Controller
 @RequestMapping("/admin")
 public class MallGoodsInfoController {
 
-    @Autowired
-    private MallGoodsCategoryService mallGoodsCategoryService;
+    private final MallGoodsCategoryService mallGoodsCategoryService;
+
+    public MallGoodsInfoController(MallGoodsCategoryService categoryService) {
+        super();
+        this.mallGoodsCategoryService = categoryService;
+    }
 
     /**
      * @param request
      * @return
      */
     @ApiIgnore
-    @GetMapping(value = "/goods")
+    @GetMapping("/goods")
     public String toGoodsInfo(HttpServletRequest request) {
         request.setAttribute("path", "goods");
         Map<String, Object> map = new HashMap<>();
-        map.put("categoryLevel", 1);
+        map.put("categoryLevel", MallCategoryLevelEnum.LEVEL_ONE.getLevel());
         map.put("parentId", null);
 
-        List<MallGoodsCategory> firstLevel = mallGoodsCategoryService.selectByLevelParentId(map);
+        List<MallGoodsCategory> firstLevel = this.mallGoodsCategoryService.selectByLevelParentId(map);
         if (!CollectionUtils.isEmpty(firstLevel)) {
-            map.replace("categoryLevel", 2);
+            map.replace("categoryLevel", MallCategoryLevelEnum.LEVEL_TWO.getLevel());
             map.replace("parentId", firstLevel.get(0).getCategoryId());
-            List<MallGoodsCategory> secondLevel = mallGoodsCategoryService.selectByLevelParentId(map);
+            List<MallGoodsCategory> secondLevel = this.mallGoodsCategoryService.selectByLevelParentId(map);
             request.setAttribute("secondLevel", secondLevel);
             if (!CollectionUtils.isEmpty(secondLevel)) {
                 map.replace("categoryLevel", 3);
                 map.replace("parentId", secondLevel.get(0).getCategoryId());
-                List<MallGoodsCategory> thirdLevel = mallGoodsCategoryService.selectByLevelParentId(map);
+                List<MallGoodsCategory> thirdLevel = this.mallGoodsCategoryService.selectByLevelParentId(map);
                 request.setAttribute("thirdLevel", thirdLevel);
             }
         }
@@ -61,12 +65,39 @@ public class MallGoodsInfoController {
     }
     
     @ApiOperation("获得分级列表")
-    @GetMapping(value = "/goods/listLevel")
+    @GetMapping(value = "/goods/levelList")
     @ResponseBody
     public Result getListLevel(@RequestParam("categoryId")Integer categoryId ){
-        MallGoodsCategory mallGoodsCategory = mallGoodsCategoryService.selectByCategoryId(categoryId);
-        System.out.println(mallGoodsCategory);
-        return ResultGenerator.getSuccessResult("");
+        MallGoodsCategory mallGoodsCategory = this.mallGoodsCategoryService.selectByCategoryId(categoryId);
+
+        // 如果level不是一级或者二级就返回错误信息
+        if (MallCategoryLevelEnum.LEVEL_ONE.getLevel() != mallGoodsCategory.getCategoryLevel().intValue() && MallCategoryLevelEnum.LEVEL_TWO.getLevel() !=  mallGoodsCategory.getCategoryLevel().intValue()){
+            return ResultGenerator.getFailResult("参数异常");
+        }
+
+        Map<String, Object> categoryResult = new HashMap<>(2);
+        Map<String, Object> param = new HashMap<>();
+
+        if (MallCategoryLevelEnum.LEVEL_ONE.getLevel() == mallGoodsCategory.getCategoryLevel()){
+            param.put("categoryLevel", MallCategoryLevelEnum.LEVEL_TWO.getLevel());
+            param.put("parentId", categoryId);
+            List<MallGoodsCategory> secondList = this.mallGoodsCategoryService.selectByLevelParentId(param);
+            categoryResult.put("secondList", secondList);
+            param.put("categoryLevel", MallCategoryLevelEnum.LEVEL_THREE.getLevel());
+            param.put("parentId", secondList.get(0).getCategoryId());
+            List<MallGoodsCategory> thirdList = this.mallGoodsCategoryService.selectByLevelParentId(param);
+            categoryResult.put("thirdList", thirdList);
+        }
+
+        if (MallCategoryLevelEnum.LEVEL_TWO.getLevel() == mallGoodsCategory.getCategoryLevel()) {
+            // 二级分类返回该分类下的所有数据
+            param.put("categoryLevel", MallCategoryLevelEnum.LEVEL_THREE.getLevel());
+            param.put("parentId", categoryId);
+            List<MallGoodsCategory> thirdList = this.mallGoodsCategoryService.selectByLevelParentId(param);
+            categoryResult.put("thirdList", thirdList);
+        }
+
+        return ResultGenerator.getSuccessResult(categoryResult);
     }
     
     @ApiOperation("添加商品信息")
@@ -76,4 +107,10 @@ public class MallGoodsInfoController {
         return ResultGenerator.getSuccessResult("");
     }
 
+    @Override
+    public String toString() {
+        return "MallGoodsInfoController{" +
+                "mallGoodsCategoryService=" + this.mallGoodsCategoryService +
+                '}';
+    }
 }

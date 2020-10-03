@@ -20,8 +20,7 @@
         category_id, category_level, parent_id, category_name, category_rank, is_deleted,
         creat_time, creat_user, update_time, update_user
     </sql>
-    <select id="selectByCategoryId" resultType="com.fh.mall.entity.MallGoodsCategory">
-        <!--@mbg.generated-->
+    <select id="selectByCategoryId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from mall_goods_category
