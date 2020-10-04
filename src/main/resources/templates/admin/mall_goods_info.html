@@ -62,15 +62,54 @@
                             </div>
                         </div>
 
+                        <!-- input -->
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <div class="form-group col-6">
+                                <label class="col-form-label" for="goodName"><i class="fas fa-check"></i>商品名称</label>
+                                <input type="text" class="form-control" id="goodName" placeholder="Enter ..." required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="col-form-label" for="goodBrief"><i class="fas fa-check"></i>商品简介</label>
+                                <input type="text" class="form-control" id="goodBrief" placeholder="Enter ..." required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="col-form-label" for="goodOriginalPace"><i class="fas fa-check"></i>商品原始价格</label>
+                                <input type="number" class="form-control" id="goodOriginalPace" placeholder="Enter ..." required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="col-form-label" for="goodShellPace"><i
+                                        class="fas fa-check"></i>商品售卖价格</label>
+                                <input type="number" class="form-control" id="goodShellPace" placeholder="Enter ..."
+                                       required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="col-form-label" for="goodInventory"><i
+                                        class="fas fa-check"></i>商品库存数</label>
+                                <input type="number" class="form-control" id="goodInventory" placeholder="Enter ..."
+                                       required>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="col-form-label" for="goodTag"><i
+                                        class="fas fa-check"></i>商品标签</label>
+                                <input type="text" class="form-control" id="goodTag" placeholder="Enter ..."
+                                       required>
+                            </div>
+                        </div>
+
                         <div>
-                            <label for="editor">内容：</label>
-                            <textarea id="editor" style="width: 700px;height: 450px"></textarea>
+                            <label for="goodDetail">商品详情：</label>
+                            <textarea id="goodDetail" style="width: 100%;height: 450px"></textarea>
+                        </div>
+
+                        <div class="mt-2 d-flex flex-row-reverse">
+                            <button class="col-2 btn btn-block bg-gradient-info btn-lg" onclick="saveGood()">保存商品</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div th:replace="admin/footer::footer-fragment"></div>
 </div>
 <div th:replace="admin/commonjs::commonjs-fragment"></div>
 <script th:src="@{/admin/plugins/kindeditor-4.1.12/kindeditor-all.js}"></script>

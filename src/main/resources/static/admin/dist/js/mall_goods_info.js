@@ -1,7 +1,7 @@
 let editor;
 $(function () {
     KindEditor.ready(K => {
-        editor = K.create('#editor', {
+        editor = K.create('#goodDetail', {
             items: [
                 'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
                 'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
@@ -47,4 +47,48 @@ function addOption( str= '', list = []) {
     for (i = 0; i < list.length; i++) {
         $(str).append('<option value="' + list[i].categoryId + '">' + list[i].categoryName + '</option>');
     }
+}
+
+function saveGood() {
+    // 还缺一个是否上架的属性
+    // 图片上传的功能也没搞定
+    let data;
+    let goodName = $('#goodName').val();
+    let goodBrief = $('#goodBrief').val();
+    let goodOriginalPace = $('#goodOriginalPace').val();
+    let goodShellPace = $('#goodShellPace').val();
+    let goodInventory = $('#goodInventory').val();
+    let goodTag = $('#goodTag').val();
+    let categoryId = $('#levelThree').val();
+    let goodDetail = editor.html();
+    console.log('goodName: ', goodName,
+        '\ngoodBrief:', goodBrief,
+        '\ngoodOriginalPace:',goodOriginalPace,
+        '\ngoodShellPace',goodShellPace,
+        '\ngoodInventory', goodInventory,
+        '\ngoodTag', goodTag,
+        '\ngoodDetail', goodDetail,
+        '\ncategoryId', categoryId);
+
+    data = {
+        goodName,
+        goodBrief,
+        originalPrice: goodOriginalPace,
+        shellPrice: goodShellPace,
+        goodInventory,
+        goodTag,
+        categoryId,
+        goodDetailContent: goodDetail
+    };
+
+    $.ajax({
+        type: 'post',
+        url: '/admin/goods',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: res => {
+            console.log(res);
+        }
+    })
+
 }

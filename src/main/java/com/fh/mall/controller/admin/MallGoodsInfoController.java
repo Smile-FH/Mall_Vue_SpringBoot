@@ -2,7 +2,9 @@ package com.fh.mall.controller.admin;
 
 import com.fh.mall.common.MallCategoryLevelEnum;
 import com.fh.mall.entity.MallGoodsCategory;
+import com.fh.mall.entity.MallGoodsInfo;
 import com.fh.mall.service.MallGoodsCategoryService;
+import com.fh.mall.service.MallGoodsInfoService;
 import com.fh.mall.utils.Result;
 import com.fh.mall.utils.ResultGenerator;
 import io.swagger.annotations.Api;
@@ -30,9 +32,11 @@ public class MallGoodsInfoController {
 
     private final MallGoodsCategoryService mallGoodsCategoryService;
 
-    public MallGoodsInfoController(MallGoodsCategoryService categoryService) {
-        super();
+    private final MallGoodsInfoService mallGoodsInfoService;
+
+    public MallGoodsInfoController(MallGoodsCategoryService categoryService, MallGoodsInfoService infoService) {
         this.mallGoodsCategoryService = categoryService;
+        this.mallGoodsInfoService = infoService;
     }
 
     /**
@@ -65,7 +69,7 @@ public class MallGoodsInfoController {
     }
     
     @ApiOperation("获得分级列表")
-    @GetMapping(value = "/goods/levelList")
+    @GetMapping("/goods/levelList")
     @ResponseBody
     public Result getListLevel(@RequestParam("categoryId")Integer categoryId ){
         MallGoodsCategory mallGoodsCategory = this.mallGoodsCategoryService.selectByCategoryId(categoryId);
@@ -103,7 +107,11 @@ public class MallGoodsInfoController {
     @ApiOperation("添加商品信息")
     @PostMapping("/goods")
     @ResponseBody
-    public Result saveGoods(){
+    public Result saveGoods(@RequestBody MallGoodsInfo mallGoodsInfo){
+        System.out.println("添加商品信息方法开始执行------");
+        System.out.println("方法入参是------mallGoodsInfo："+ mallGoodsInfo.toString());
+
+//        int i = this.mallGoodsInfoService.insertSelective(mallGoodsInfo);
         return ResultGenerator.getSuccessResult("");
     }
 

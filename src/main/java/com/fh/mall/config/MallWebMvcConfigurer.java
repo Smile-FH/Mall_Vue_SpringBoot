@@ -46,11 +46,11 @@ public class MallWebMvcConfigurer implements WebMvcConfigurer {
          * @Param: [registry]
          * @Return: void
          */
-        registry.addInterceptor(adminLoginInterceptor)
-                .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/login")
-                .excludePathPatterns("/admin/dist/**")
-                .excludePathPatterns("/admin/plugins/**");
+//        registry.addInterceptor(adminLoginInterceptor)
+//                .addPathPatterns("/admin/**")
+//                .excludePathPatterns("/admin/login")
+//                .excludePathPatterns("/admin/dist/**")
+//                .excludePathPatterns("/admin/plugins/**");
     }
 
     @Override
