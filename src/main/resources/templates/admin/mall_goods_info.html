@@ -94,6 +94,11 @@
                                 <input type="text" class="form-control" id="goodTag" placeholder="Enter ..."
                                        required>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label">上架状态:&nbsp;</label>
+                                <input name="goodsSellStatus" type="radio" checked value="1"/>&nbsp;上架&nbsp;
+                                <input name="goodsSellStatus" type="radio" value="0"/>&nbsp;下架&nbsp;
+                            </div>
                         </div>
 
                         <div>
@@ -104,6 +109,52 @@
                         <div class="mt-2 d-flex flex-row-reverse">
                             <button class="col-2 btn btn-block bg-gradient-info btn-lg" onclick="saveGood()">保存商品</button>
                         </div>
+
+                        <!-- .modal -->
+                        <div class="modal fade" id="modal-lg">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Large Modal</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form onsubmit="return false;">
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <th:block th:if="${null == goods}">
+                                                        <img id="goodsCoverImg" src="/admin/dist/img/user3-128x128.jpg"
+                                                             style="height: 64px;width: 64px;">
+                                                    </th:block>
+                                                    <th:block th:unless="${null == goods}">
+                                                        <img id="goodsCoverImg" th:src="${goods.goodsCoverImg}"
+                                                             style="width:160px ;height: 160px;display:block;">
+                                                    </th:block>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-4">
+                                                    <button class="btn btn-info" style="margin-bottom: 5px;"
+                                                            id="uploadGoodsCoverImg">
+                                                        <i class="fa fa-picture-o"></i>&nbsp;上传商品主图
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+
                     </div>
                 </div>
             </div>
@@ -112,6 +163,7 @@
     <div th:replace="admin/footer::footer-fragment"></div>
 </div>
 <div th:replace="admin/commonjs::commonjs-fragment"></div>
+<script th:src="@{/admin/plugins/ajaxupload/ajaxupload.js}"></script>
 <script th:src="@{/admin/plugins/kindeditor-4.1.12/kindeditor-all.js}"></script>
 <script th:src="@{/admin/plugins/kindeditor-4.1.12/lang/zh-CN.js}"></script>
 <script type="text/javascript" th:src="@{/admin/dist/js/mall_goods_info.js}"></script>

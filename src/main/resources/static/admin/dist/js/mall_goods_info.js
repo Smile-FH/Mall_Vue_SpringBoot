@@ -16,6 +16,29 @@ $(function () {
             filePostName: 'file'
         });
     });
+
+    new AjaxUpload('#uploadGoodsCoverImg', {
+        action: '/upload/file',
+        name: 'file',
+        autoSubmit: true,
+        responseType: "json",
+        onSubmit: function (file, extension) {
+            if (!(extension && /^(jpg|jpeg|png|gif)$/.test(extension.toLowerCase()))) {
+                alert('只支持jpg、png、gif格式的文件！');
+                return false;
+            }
+        },
+        onComplete: (file, r) => {
+            console.log(r);
+            if (r != null && r.resultCode == 200) {
+                $("#goodsCoverImg").attr("src", r.data);
+                $("#goodsCoverImg").attr("style", "width: 128px;height: 128px;display:block;");
+                return false;
+            } else {
+                alert("error");
+            }
+        }
+    });
 });
 
 function getList(str = '') {
@@ -61,6 +84,8 @@ function saveGood() {
     let goodTag = $('#goodTag').val();
     let categoryId = $('#levelThree').val();
     let goodDetail = editor.html();
+    let isShelves = $('input[name=goodsSellStatus]:checked').val();
+    let goodCoverImg = $('#goodsCoverImg')[0].src;
     console.log('goodName: ', goodName,
         '\ngoodBrief:', goodBrief,
         '\ngoodOriginalPace:',goodOriginalPace,
@@ -68,7 +93,9 @@ function saveGood() {
         '\ngoodInventory', goodInventory,
         '\ngoodTag', goodTag,
         '\ngoodDetail', goodDetail,
-        '\ncategoryId', categoryId);
+        '\ncategoryId', categoryId,
+        '\nisShelves', isShelves,
+        '\ngoodCoverImg', goodCoverImg);
 
     data = {
         goodName,
@@ -78,17 +105,24 @@ function saveGood() {
         goodInventory,
         goodTag,
         categoryId,
-        goodDetailContent: goodDetail
+        isShelves,
+        goodDetailContent: goodDetail,
+        goodMainImage: goodCoverImg,
+        goodCarousel: goodCoverImg
     };
+    $('#modal-lg').modal('show');
 
-    $.ajax({
-        type: 'post',
-        url: '/admin/goods',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
-        success: res => {
-            console.log(res);
-        }
-    })
+    // $.ajax({
+    //     type: 'post',
+    //     url: '/admin/goods',
+    //     contentType: 'application/json',
+    //     data: JSON.stringify(data),
+    //     success: res => {
+    //         console.log(res);
+    //     },
+    //     error: res => {
+    //         console.log(res)
+    //     }
+    // })
 
 }

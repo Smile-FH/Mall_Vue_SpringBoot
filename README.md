@@ -98,3 +98,22 @@ Result还有一个具体的实体类叫做ResultGenerate，封装类，响应码
 3. [数据库建表时先建一个只有字段名的空表，然后在空表的基础上去改]()
 4. [Law Of Demeter(最少知识原则) Wiki](https://en.wikipedia.org/wiki/Law_of_Demeter)
 5. [Java Law Of Demeter Java Examples](https://alvinalexander.com/java/java-law-of-demeter-java-examples/#:~:text=The%20Law%20of%20Demeter%20for%20functions%20requires%20that,in%20the%20scope%20of%20M.%20Head%20First%20Java.)
+
+2020年10月4日11点18分：  
+[jquery]()和[bootstrap]()的知识抽空也得看看
+1. [bootstrap------栅格系统](https://getbootstrap.com/docs/4.4/layout/grid/)
+2. [Bootstrap------边距问题](https://getbootstrap.com/docs/4.4/utilities/spacing/)
+3. [Bootstrap------flex布局问题](https://getbootstrap.com/docs/4.4/utilities/flex/)
+4. [AdminLTE中的swatch开关拿值问题]()
+5. [Jquery `$().val()` 作用及用法]()
+6. [前端有没有事务控制，也就是说，有没有一种机制使得连续的请求能合并到一步去执行的]()
+
+2020年10月5日08点22分：
+1. [箭头函数和原始函数的区别是啥？]()
+2. [bootstrap自定义属性走一波]()
+3. [bootstrap模态框瞅瞅吧，不然都不知道是啥东西]()
+4. [前端页面source中没有需要的文件时，要怎么办]()
+   1. 检查代码中的编译包中有没有该文件，如果没有则是因为项目编译不完全，需要重新编译。
+   2. 检查代码中该页面是否具有相关的页面js引入
+5. [Thymeleaf中if和unless用法](https://blog.csdn.net/u014374009/article/details/104267168)
+- [ ] 不舒服的地方：商品信息编辑的时候应该给上传图片单独的块来搞，不应该隐藏到模态框中。
