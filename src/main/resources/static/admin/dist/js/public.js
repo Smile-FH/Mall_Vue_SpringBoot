@@ -6,9 +6,11 @@ let jQGrid = $('#jqGrid');
  * @returns {boolean}
  */
 function isNull(obj) {
-    if (null === obj || obj === undefined || "" === obj.trim()) {
-        return true;
+    let judge = false;
+    if (null === obj || undefined === obj || "" === obj.trim()) {
+        judge = true;
     }
+    return judge;
 }
 
 /**
@@ -27,7 +29,7 @@ function validLength(obj, length) {
  * @param str
  * @returns {boolean}
  */
-function validCN_ENString2_10(str) {
+function validString(str) {
     let reg = /^[a-zA-Z0-9-\u4E00-\u9FA5_,、-]{2,10}$/;
     return reg.test(str.trim());
 }

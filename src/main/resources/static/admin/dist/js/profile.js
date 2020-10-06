@@ -38,7 +38,7 @@ function validUserNameForUpdate(nickName, oldPassword, newPassword) {
             title: "Nick Name不能为空"
         });
         return false;
-    } else if (!validCN_ENString2_10(nickName)) {
+    } else if (!validString(nickName)) {
         Swal.fire({
             title: "Nick Name格式不太对啊，只能输入2-10位的字母汉字或_、"
         });

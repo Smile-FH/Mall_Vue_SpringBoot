@@ -66,32 +66,35 @@
                         <div class="d-flex flex-wrap justify-content-between">
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodName"><i class="fas fa-check"></i>商品名称</label>
-                                <input type="text" class="form-control" id="goodName" placeholder="Enter ..." required>
+                                <input type="text" class="form-control" id="goodName" placeholder="*(请输入商品名称200字以内)"
+                                       required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodBrief"><i class="fas fa-check"></i>商品简介</label>
-                                <input type="text" class="form-control" id="goodBrief" placeholder="Enter ..." required>
+                                <input type="text" class="form-control" id="goodBrief" placeholder="*（请输入商品简介200字以内）"
+                                       required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodOriginalPace"><i class="fas fa-check"></i>商品原始价格</label>
-                                <input type="number" class="form-control" id="goodOriginalPace" placeholder="Enter ..." required>
+                                <input type="number" class="form-control" id="goodOriginalPace"
+                                       placeholder="请在这里设定商品的原始价格" required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodShellPace"><i
                                         class="fas fa-check"></i>商品售卖价格</label>
-                                <input type="number" class="form-control" id="goodShellPace" placeholder="Enter ..."
+                                <input type="number" class="form-control" id="goodShellPace" placeholder="请在这里输入商品的实际售价"
                                        required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodInventory"><i
                                         class="fas fa-check"></i>商品库存数</label>
-                                <input type="number" class="form-control" id="goodInventory" placeholder="Enter ..."
+                                <input type="number" class="form-control" id="goodInventory" placeholder="请在这里输入商品的库存数"
                                        required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodTag"><i
                                         class="fas fa-check"></i>商品标签</label>
-                                <input type="text" class="form-control" id="goodTag" placeholder="Enter ..."
+                                <input type="text" class="form-control" id="goodTag" placeholder="请在这里输入商品的使用标签"
                                        required>
                             </div>
                             <div class="form-group">
@@ -107,7 +110,8 @@
                         </div>
 
                         <div class="mt-2 d-flex flex-row-reverse">
-                            <button class="col-2 btn btn-block bg-gradient-info btn-lg" onclick="saveGood()">保存商品</button>
+                            <button class="col-2 btn btn-block bg-gradient-info btn-lg" onclick="verifyParam()">保存商品
+                            </button>
                         </div>
 
                         <!-- .modal -->
@@ -126,11 +130,11 @@
                                                 <div class="col-sm-4">
                                                     <th:block th:if="${null == goods}">
                                                         <img id="goodsCoverImg" src="/admin/dist/img/user3-128x128.jpg"
-                                                             style="height: 64px;width: 64px;">
+                                                             style="height: 64px;width: 64px;" alt="#">
                                                     </th:block>
                                                     <th:block th:unless="${null == goods}">
                                                         <img id="goodsCoverImg" th:src="${goods.goodsCoverImg}"
-                                                             style="width:160px ;height: 160px;display:block;">
+                                                             style="width:160px ;height: 160px;display:block;" alt="#">
                                                     </th:block>
                                                 </div>
                                             </div>
@@ -145,8 +149,9 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                        <button type="button" class="btn btn-primary" onclick="saveGood()">Save changes</button>
                                     </div>
                                 </div>
                                 <!-- /.modal-content -->

@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Description: 商城物品信息编辑控制层接口
@@ -108,8 +106,7 @@ public class MallGoodsInfoController {
     @PostMapping("/goods")
     @ResponseBody
     public Result saveGoods(@RequestBody MallGoodsInfo mallGoodsInfo){
-        System.out.println("添加商品信息方法开始执行------");
-        System.out.println("方法入参是------mallGoodsInfo："+ mallGoodsInfo.toString());
+        System.out.println("添加商品信息方法开始执行------方法入参是------mallGoodsInfo：" + mallGoodsInfo);
 
 //        int i = this.mallGoodsInfoService.insertSelective(mallGoodsInfo);
         return ResultGenerator.getSuccessResult("");

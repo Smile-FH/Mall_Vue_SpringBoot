@@ -83,7 +83,7 @@ function addGoodsCategory() {
             title: '添加分类名称',
             input: 'text',
             inputValidator: value => {
-                if (!validCN_ENString2_10(value)) {
+                if (!validString(value)) {
                     return '2-10位中英文字符';
                 }
             },
@@ -147,7 +147,7 @@ function editCategoryInfo() {
             input: 'text',
             inputValue: rowData.categoryName,
             inputValidator: value => {
-                if (!validCN_ENString2_10(value)) {
+                if (!validString(value)) {
                     return '2-10位中英文字符';
                 }
             },

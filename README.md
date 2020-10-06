@@ -117,3 +117,10 @@ Result还有一个具体的实体类叫做ResultGenerate，封装类，响应码
    2. 检查代码中该页面是否具有相关的页面js引入
 5. [Thymeleaf中if和unless用法](https://blog.csdn.net/u014374009/article/details/104267168)
 - [ ] 不舒服的地方：商品信息编辑的时候应该给上传图片单独的块来搞，不应该隐藏到模态框中。
+
+2020年10月6日18点18分：
+1. [js的for循环中出现异步函数，回调引用的循环值总是最后一步的值？](https://www.cnblogs.com/csuwujing/p/8021913.html)
+2. [关于JS的for循环包裹异步函数的问题](https://www.jianshu.com/p/690f58a3ff7b)
+3. [maven插件的原理及mvn spring-boot:run命令的执行过程]()
+4. [js判断包含字符和截取字符串功能是不一样的]()
+5. [JAVA中ResourceBundle：用来解决国际化本地化问题]()

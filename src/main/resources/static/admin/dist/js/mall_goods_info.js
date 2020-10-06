@@ -24,18 +24,24 @@ $(function () {
         responseType: "json",
         onSubmit: function (file, extension) {
             if (!(extension && /^(jpg|jpeg|png|gif)$/.test(extension.toLowerCase()))) {
-                alert('只支持jpg、png、gif格式的文件！');
+                Swal.fire({
+                    icon: "error",
+                    text: '只支持jpg、png、gif格式的文件！'
+                });
                 return false;
             }
         },
         onComplete: (file, r) => {
-            console.log(r);
             if (r != null && r.resultCode == 200) {
                 $("#goodsCoverImg").attr("src", r.data);
                 $("#goodsCoverImg").attr("style", "width: 128px;height: 128px;display:block;");
                 return false;
             } else {
-                alert("error");
+                Swal.fire({
+                    icon: 'error',
+                    title: '上传出错啦！',
+                    text: '未知原因上传出错，请联系管理员！'
+                })
             }
         }
     });
@@ -64,7 +70,7 @@ function getList(str = '') {
     })
 }
 
-function addOption( str= '', list = []) {
+function addOption(str = '', list = []) {
     let i;
     $(str).empty();
     for (i = 0; i < list.length; i++) {
@@ -73,8 +79,7 @@ function addOption( str= '', list = []) {
 }
 
 function saveGood() {
-    // 还缺一个是否上架的属性
-    // 图片上传的功能也没搞定
+    let successResultCode = 200;
     let data;
     let goodName = $('#goodName').val();
     let goodBrief = $('#goodBrief').val();
@@ -86,16 +91,22 @@ function saveGood() {
     let goodDetail = editor.html();
     let isShelves = $('input[name=goodsSellStatus]:checked').val();
     let goodCoverImg = $('#goodsCoverImg')[0].src;
-    console.log('goodName: ', goodName,
-        '\ngoodBrief:', goodBrief,
-        '\ngoodOriginalPace:',goodOriginalPace,
-        '\ngoodShellPace',goodShellPace,
-        '\ngoodInventory', goodInventory,
-        '\ngoodTag', goodTag,
-        '\ngoodDetail', goodDetail,
-        '\ncategoryId', categoryId,
-        '\nisShelves', isShelves,
-        '\ngoodCoverImg', goodCoverImg);
+    if (isNull(goodCoverImg) || -1 !== goodCoverImg.indexOf('user3-128x128')) {
+        return Swal.fire({
+            icon: 'error',
+            text: '请先上传图片'
+        })
+    }
+    // console.log('goodName: ', goodName,
+    //     '\ngoodBrief:', goodBrief,
+    //     '\ngoodOriginalPace:',goodOriginalPace,
+    //     '\ngoodShellPace',goodShellPace,
+    //     '\ngoodInventory', goodInventory,
+    //     '\ngoodTag', goodTag,
+    //     '\ngoodDetail', goodDetail,
+    //     '\ncategoryId', categoryId,
+    //     '\nisShelves', isShelves,
+    //     '\ngoodCoverImg', goodCoverImg);
 
     data = {
         goodName,
@@ -110,19 +121,59 @@ function saveGood() {
         goodMainImage: goodCoverImg,
         goodCarousel: goodCoverImg
     };
+
+    $.ajax({
+        type: 'post',
+        url: '/admin/goods',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: res => {
+            console.log(res);
+            if (successResultCode === res.resultCode) {
+                $('#modal-lg').modal('hide');
+                Swal.fire({
+                    icon: "success",
+                    title: '添加结果',
+                    text: '添加新商品成功啦！'
+                })
+            }
+        },
+        error: res => {
+            Swal.fire({
+                icon: 'error',
+                title: '添加结果',
+                text: '添加新商品失败，请联系运维人员！'
+            })
+        }
+    })
+}
+
+function verifyParam() {
+    let mapKey;
+    let i;
+    let goodName = $('#goodName').val();
+    let goodBrief = $('#goodBrief').val();
+    let goodOriginalPace = $('#goodOriginalPace').val();
+    let goodShellPace = $('#goodShellPace').val();
+    let goodInventory = $('#goodInventory').val();
+    let goodTag = $('#goodTag').val();
+    let categoryId = $('#levelThree').val();
+    let isShelves = $('input[name=goodsSellStatus]:checked').val();
+    let goodDetail = editor.html();
+    let obj = [goodName, goodBrief, goodOriginalPace, goodShellPace, goodInventory, goodTag, categoryId, isShelves, goodDetail];
+    let str = ['goodName', 'goodBrief', 'goodOriginalPace', 'goodShellPace', 'goodInventory', 'goodTag', 'categoryId', 'isShelves', 'goodDetail'];
+    let zhStr = ['商品名称', '商品简介', '商品原始价格', '商品售卖价格', '商品库存数', '商品标签', '分类', '上架状态', '商品详情'];
+    let map = new Map();
+    for (i = 0; i < obj.length; i++) {
+        map.set(zhStr[i], obj[i]);
+    }
+    for (mapKey of map) {
+        if (isNull(mapKey[1])) {
+            return Swal.fire({
+                icon: "error",
+                text: mapKey[0] + '不能为空请再填一填'
+            })
+        }
+    }
     $('#modal-lg').modal('show');
-
-    // $.ajax({
-    //     type: 'post',
-    //     url: '/admin/goods',
-    //     contentType: 'application/json',
-    //     data: JSON.stringify(data),
-    //     success: res => {
-    //         console.log(res);
-    //     },
-    //     error: res => {
-    //         console.log(res)
-    //     }
-    // })
-
 }
