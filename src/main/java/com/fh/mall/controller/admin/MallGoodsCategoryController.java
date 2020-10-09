@@ -32,7 +32,7 @@ public class MallGoodsCategoryController {
 
     @ApiIgnore
     @GetMapping("/category")
-    public String category(
+    public String toCategory(
             HttpServletRequest request,
             @RequestParam("categoryLevel") Byte categoryLevel,
             @RequestParam("parentId") Integer parentId,

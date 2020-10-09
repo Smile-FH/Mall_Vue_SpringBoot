@@ -89,30 +89,30 @@ Result还有一个具体的实体类叫做ResultGenerate，封装类，响应码
 在开发中发现一个问题，查询到的数据总页数有点不对劲，后面再说吧
 
 2020年10月1日15点26分：
-1. [jQuery中监听事件一般都是用on来监听]()
+1. [## jQuery中监听事件一般都是用on来监听 ##]()
 
 2020年10月3日09点21分：
 1. [Jquery中报错 Cannot read property 'toLowerCase' of undefined，  
 一般是使用`$(name)`时传name值错了)](https://qiita.com/BRSF/items/4f4e39bd82778b976392)
-2. [Java注解中的属性动态赋值问题：代码质量优化]()
+2. [## Java注解中的属性动态赋值问题：代码质量优化 ##]()
 3. [数据库建表时先建一个只有字段名的空表，然后在空表的基础上去改]()
 4. [Law Of Demeter(最少知识原则) Wiki](https://en.wikipedia.org/wiki/Law_of_Demeter)
 5. [Java Law Of Demeter Java Examples](https://alvinalexander.com/java/java-law-of-demeter-java-examples/#:~:text=The%20Law%20of%20Demeter%20for%20functions%20requires%20that,in%20the%20scope%20of%20M.%20Head%20First%20Java.)
 
 2020年10月4日11点18分：  
-[jquery]()和[bootstrap]()的知识抽空也得看看
+[## jquery ##]()和[## bootstrap ##]()的知识抽空也得看看
 1. [bootstrap------栅格系统](https://getbootstrap.com/docs/4.4/layout/grid/)
 2. [Bootstrap------边距问题](https://getbootstrap.com/docs/4.4/utilities/spacing/)
 3. [Bootstrap------flex布局问题](https://getbootstrap.com/docs/4.4/utilities/flex/)
-4. [AdminLTE中的swatch开关拿值问题]()
-5. [Jquery `$().val()` 作用及用法]()
-6. [前端有没有事务控制，也就是说，有没有一种机制使得连续的请求能合并到一步去执行的]()
+4. [## AdminLTE中的swatch开关拿值问题 ##]()
+5. [## Jquery `$().val()` 作用及用法 ##]()
+6. [## 前端有没有事务控制，也就是说，有没有一种机制使得连续的请求能合并到一步去执行的 ##]()
 
 2020年10月5日08点22分：
-1. [箭头函数和原始函数的区别是啥？]()
-2. [bootstrap自定义属性走一波]()
-3. [bootstrap模态框瞅瞅吧，不然都不知道是啥东西]()
-4. [前端页面source中没有需要的文件时，要怎么办]()
+1. [## 箭头函数和原始函数的区别是啥？##]()
+2. [## bootstrap自定义属性走一波 ##]()
+3. [## bootstrap模态框瞅瞅吧，不然都不知道是啥东西 ##]()
+4. 前端页面source中没有需要的文件时，要怎么办
    1. 检查代码中的编译包中有没有该文件，如果没有则是因为项目编译不完全，需要重新编译。
    2. 检查代码中该页面是否具有相关的页面js引入
 5. [Thymeleaf中if和unless用法](https://blog.csdn.net/u014374009/article/details/104267168)
@@ -121,6 +121,14 @@ Result还有一个具体的实体类叫做ResultGenerate，封装类，响应码
 2020年10月6日18点18分：
 1. [js的for循环中出现异步函数，回调引用的循环值总是最后一步的值？](https://www.cnblogs.com/csuwujing/p/8021913.html)
 2. [关于JS的for循环包裹异步函数的问题](https://www.jianshu.com/p/690f58a3ff7b)
-3. [maven插件的原理及mvn spring-boot:run命令的执行过程]()
-4. [js判断包含字符和截取字符串功能是不一样的]()
-5. [JAVA中ResourceBundle：用来解决国际化本地化问题]()
+3. [## maven插件的原理及mvn spring-boot:run命令的执行过程 ##]()
+4. [## js判断包含字符和截取字符串功能是不一样的 ##]()
+5. [## JAVA中ResourceBundle：用来解决国际化本地化问题 ##]()
+
+2020年10月8日17点32分：
+1. [## 关于mvc地址映射带参数(路径参数)问题 ##]()
+2. [## 关于thymeleaf中的某些属性th:block, th:unless, th:utext ##]()
+3. [## 拿到商品信息的id之后应该怎么取显示它的分类 ##]()
+
+2020年10月9日19点55分：
+1. [## WebMvcConfigurer拦截原理 ##]()

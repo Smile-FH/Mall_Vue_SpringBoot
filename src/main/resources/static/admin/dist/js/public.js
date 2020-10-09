@@ -30,7 +30,7 @@ function validLength(obj, length) {
  * @returns {boolean}
  */
 function validString(str) {
-    let reg = /^[a-zA-Z0-9-\u4E00-\u9FA5_,、-]{2,10}$/;
+    let reg = /^[a-zA-Z0-9-\u4E00-\u9FA5_,、]{2,10}$/;
     return reg.test(str.trim());
 }
 
@@ -59,8 +59,11 @@ function reload() {
  * @param time
  * @returns {string}
  */
-function time(time = +new Date()) {
-    let date = new Date(time + 8 * 3600 * 1000); // 增加8小时
+function time(time = new Date()) {
+    let h = 8;
+    let s = 3600;
+    let ms = 1000;
+    let date = new Date(time + h * s * ms); // 增加8小时
     return date.toJSON().substr(0, 19).replace('T', ' ');
 }
 

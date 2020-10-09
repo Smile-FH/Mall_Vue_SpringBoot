@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/header::head-fragment"></head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <header th:replace="admin/header::header-fragment"></header>
+    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+            </div>
+        </div>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">商品管理页</h3>
+                    </div> <!-- /.card-body -->
+                    <div class="card-body">
+                        <div class="grid-btn">
+                            <button class="btn btn-info" onclick="goodShelveStatus(1)"><i
+                                    class="fa fa-plus"></i>&nbsp;上架商品
+                            </button>
+                            <button class="btn btn-danger" onclick="goodShelveStatus(0)"><i
+                                    class="fa fa-trash-o"></i>&nbsp;下架商品
+                            </button>
+                            <button class="btn btn-success" onclick="addGood()"><i
+                                    class="fa fa-trash-o"></i>&nbsp;添加商品
+                            </button>
+                            <button class="btn btn-warning" onclick="editGood()"><i
+                                    class="fa fa-trash-o"></i>&nbsp;编辑商品
+                            </button>
+
+                        </div>
+                        <div class="panel panel-default">
+                            <table id="jqGrid"></table>
+                            <div id="jqGridPager"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="admin/footer::footer-fragment"></div>
+</div>
+<div th:replace="admin/commonjs::commonjs-fragment"></div>
+<script type="text/javascript" th:src="@{/admin/dist/js/mall_goods.js}"></script>
+</body>
+</html>

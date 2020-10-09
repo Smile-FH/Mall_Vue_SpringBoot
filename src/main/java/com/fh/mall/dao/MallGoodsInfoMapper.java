@@ -1,6 +1,10 @@
 package com.fh.mall.dao;
 
 import com.fh.mall.entity.MallGoodsInfo;
+import com.fh.mall.utils.PageQueryUtil;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Description: 商品信息持久层接口
@@ -56,4 +60,12 @@ public interface MallGoodsInfoMapper {
      * @return update count
      */
     int updateByPrimaryKey(MallGoodsInfo record);
+
+    List<MallGoodsInfo> goodsList(@Param("p")PageQueryUtil pageQueryUtil);
+
+    /**
+     * query the total number of data in the goodInfo table
+     * @return
+     */
+    int getTotalAmountGoods();
 }

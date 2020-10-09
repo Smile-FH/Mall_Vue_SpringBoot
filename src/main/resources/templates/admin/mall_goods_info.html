@@ -28,7 +28,7 @@
                                     <select class="custom-select" id="levelOne" onchange="getList('#levelOne')">
                                         <th:block th:unless="${null == firstLevel}">
                                             <th:block th:each="c : ${firstLevel}">
-                                                <option th:value="${c.categoryId}" th:text="${c.categoryName}"></option>
+                                                <option th:value="${c.categoryId}" th:text="${c.categoryName}" th:selected="${null != firstLevelId and firstLevelId == c.categoryId ? true:false}"></option>
                                             </th:block>
                                         </th:block>
                                     </select>
@@ -41,7 +41,7 @@
                                     <select class="custom-select" id="levelTwo" onchange="getList('#levelTwo')">
                                         <th:block th:unless="${null == secondLevel}">
                                             <th:block th:each="d : ${secondLevel}">
-                                                <option th:value="${d.categoryId}" th:text="${d.categoryName}"></option>
+                                                <option th:value="${d.categoryId}" th:text="${d.categoryName}" th:selected="${null != secondLevelId and secondLevelId == d.categoryId ? true:false}"></option>
                                             </th:block>
                                         </th:block>
                                     </select>
@@ -54,7 +54,7 @@
                                     <select class="custom-select" id="levelThree">
                                         <th:block th:unless="${null == thirdLevel}">
                                             <th:block th:each="e : ${thirdLevel}">
-                                                <option th:value="${e.categoryId}" th:text="${e.categoryName}"></option>
+                                                <option th:value="${e.categoryId}" th:text="${e.categoryName}" th:selected="${null != goodInfo and goodInfo.goodId == e.categoryId ? true:false}"></option>
                                             </th:block>
                                         </th:block>
                                     </select>
@@ -64,49 +64,62 @@
 
                         <!-- input -->
                         <div class="d-flex flex-wrap justify-content-between">
+                            <input type="hidden" th:value="${goodInfo != null ? goodInfo.goodId : 0}" id="goodInfo">
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodName"><i class="fas fa-check"></i>商品名称</label>
                                 <input type="text" class="form-control" id="goodName" placeholder="*(请输入商品名称200字以内)"
+                                       th:value="${goodInfo != null and goodInfo.goodName != null ? goodInfo.goodName:''}"
                                        required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodBrief"><i class="fas fa-check"></i>商品简介</label>
                                 <input type="text" class="form-control" id="goodBrief" placeholder="*（请输入商品简介200字以内）"
+                                       th:value="${goodInfo != null and goodInfo.goodBrief != null ? goodInfo.goodBrief : ''}"
                                        required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodOriginalPace"><i class="fas fa-check"></i>商品原始价格</label>
                                 <input type="number" class="form-control" id="goodOriginalPace"
+                                       th:value="${goodInfo != null and goodInfo.originalPrice != null ? goodInfo.originalPrice : ''}"
                                        placeholder="请在这里设定商品的原始价格" required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodShellPace"><i
                                         class="fas fa-check"></i>商品售卖价格</label>
                                 <input type="number" class="form-control" id="goodShellPace" placeholder="请在这里输入商品的实际售价"
+                                       th:value="${goodInfo != null and goodInfo.shellPrice != null ? goodInfo.shellPrice : ''}"
                                        required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodInventory"><i
                                         class="fas fa-check"></i>商品库存数</label>
                                 <input type="number" class="form-control" id="goodInventory" placeholder="请在这里输入商品的库存数"
+                                       th:value="${goodInfo != null and goodInfo.goodInventory != null ? goodInfo.goodInventory : ''}"
                                        required>
                             </div>
                             <div class="form-group col-6">
                                 <label class="col-form-label" for="goodTag"><i
                                         class="fas fa-check"></i>商品标签</label>
                                 <input type="text" class="form-control" id="goodTag" placeholder="请在这里输入商品的使用标签"
+                                       th:value="${goodInfo != null and goodInfo.goodTag != null ? goodInfo.goodTag : ''}"
                                        required>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">上架状态:&nbsp;</label>
-                                <input name="goodsSellStatus" type="radio" checked value="1"/>&nbsp;上架&nbsp;
-                                <input name="goodsSellStatus" type="radio" value="0"/>&nbsp;下架&nbsp;
+                                <input name="goodsSellStatus" type="radio" checked
+                                       th:checked="${(null == goodInfo || null != goodInfo and goodInfo.isShelves == 1) ? true:false}"
+                                       value="1"/>&nbsp;上架&nbsp;
+                                <input name="goodsSellStatus" type="radio"
+                                       th:checked="${(null != goodInfo and goodInfo.isShelves == 0) ? true:false}"
+                                       value="0"/>&nbsp;下架&nbsp;
                             </div>
                         </div>
 
                         <div>
                             <label for="goodDetail">商品详情：</label>
-                            <textarea id="goodDetail" style="width: 100%;height: 450px"></textarea>
+                            <textarea id="goodDetail"
+                                      th:utext="${goodInfo != null and goodInfo.goodDetailContent != null ? goodInfo.goodDetailContent : ''}"
+                                      style="width: 100%;height: 450px"></textarea>
                         </div>
 
                         <div class="mt-2 d-flex flex-row-reverse">
@@ -128,12 +141,12 @@
                                         <form onsubmit="return false;">
                                             <div class="form-group">
                                                 <div class="col-sm-4">
-                                                    <th:block th:if="${null == goods}">
+                                                    <th:block th:if="${null == goodInfo}">
                                                         <img id="goodsCoverImg" src="/admin/dist/img/user3-128x128.jpg"
                                                              style="height: 64px;width: 64px;" alt="#">
                                                     </th:block>
-                                                    <th:block th:unless="${null == goods}">
-                                                        <img id="goodsCoverImg" th:src="${goods.goodsCoverImg}"
+                                                    <th:block th:unless="${null == goodInfo}">
+                                                        <img id="goodsCoverImg" th:src="${goodInfo.goodMainImage}"
                                                              style="width:160px ;height: 160px;display:block;" alt="#">
                                                     </th:block>
                                                 </div>

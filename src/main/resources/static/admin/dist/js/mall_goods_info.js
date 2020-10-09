@@ -12,7 +12,7 @@ $(function () {
                 'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
                 'anchor', 'link', 'unlink', '|', 'about'
             ],
-            uploadJson: '/admin/upload/file',
+            uploadJson: '/upload/file',
             filePostName: 'file'
         });
     });
@@ -45,12 +45,14 @@ $(function () {
             }
         }
     });
+    let a = $('#goodInfo').val();
+    console.log(a);
 });
 
 function getList(str = '') {
     $.ajax({
         type: 'get',
-        url: '/admin/goods/levelList?categoryId=' + $(str).val(),
+        url: '/admin/goodInfo/levelList?categoryId=' + $(str).val(),
         contentType: 'application/json',
         success: res => {
             let thirdList;
@@ -80,7 +82,13 @@ function addOption(str = '', list = []) {
 
 function saveGood() {
     let successResultCode = 200;
+    let failResultCode = 500;
     let data;
+    let type;
+    let successResultMessage;
+    let failResultMessage;
+    let titleText;
+    let goodId = $('#goodInfo').val();
     let goodName = $('#goodName').val();
     let goodBrief = $('#goodBrief').val();
     let goodOriginalPace = $('#goodOriginalPace').val();
@@ -97,17 +105,6 @@ function saveGood() {
             text: '请先上传图片'
         })
     }
-    // console.log('goodName: ', goodName,
-    //     '\ngoodBrief:', goodBrief,
-    //     '\ngoodOriginalPace:',goodOriginalPace,
-    //     '\ngoodShellPace',goodShellPace,
-    //     '\ngoodInventory', goodInventory,
-    //     '\ngoodTag', goodTag,
-    //     '\ngoodDetail', goodDetail,
-    //     '\ncategoryId', categoryId,
-    //     '\nisShelves', isShelves,
-    //     '\ngoodCoverImg', goodCoverImg);
-
     data = {
         goodName,
         goodBrief,
@@ -121,29 +118,52 @@ function saveGood() {
         goodMainImage: goodCoverImg,
         goodCarousel: goodCoverImg
     };
+    if (0 < goodId) {
+        type = 'put';
+        data.goodId = goodId;
+        titleText = '修改信息结果';
+        successResultMessage = '修改商品信息成功！';
+        failResultMessage = '修改商品信息失败，请联系运维人员！';
+    } else {
+        type = 'post';
+        titleText = '添加商品结果';
+        successResultMessage = '添加商品信息成功！';
+        failResultMessage = '添加新商品失败，请联系运维人员！';
+    }
+    // console.log('goodName: ', goodName,
+    //     '\ngoodBrief:', goodBrief,
+    //     '\ngoodOriginalPace:',goodOriginalPace,
+    //     '\ngoodShellPace',goodShellPace,
+    //     '\ngoodInventory', goodInventory,
+    //     '\ngoodTag', goodTag,
+    //     '\ngoodDetail', goodDetail,
+    //     '\ncategoryId', categoryId,
+    //     '\nisShelves', isShelves,
+    //     '\ngoodCoverImg', goodCoverImg);
+
 
     $.ajax({
-        type: 'post',
-        url: '/admin/goods',
+        type,
+        url: '/admin/goodInfo',
         contentType: 'application/json',
         data: JSON.stringify(data),
         success: res => {
             console.log(res);
+            $('#modal-lg').modal('hide');
             if (successResultCode === res.resultCode) {
-                $('#modal-lg').modal('hide');
                 Swal.fire({
                     icon: "success",
-                    title: '添加结果',
-                    text: '添加新商品成功啦！'
+                    title: titleText,
+                    text: successResultMessage
+                })
+            } else if (failResultCode === res.resultCode){
+                Swal.fire({
+                    icon: "error",
+                    title: titleText,
+                    text: failResultMessage
                 })
             }
-        },
-        error: res => {
-            Swal.fire({
-                icon: 'error',
-                title: '添加结果',
-                text: '添加新商品失败，请联系运维人员！'
-            })
+            reload();
         }
     })
 }

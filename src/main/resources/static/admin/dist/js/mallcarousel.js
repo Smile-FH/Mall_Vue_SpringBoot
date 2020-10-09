@@ -4,7 +4,7 @@ $(function () {
         datatype: "json",
         colModel: [
             { label: 'id', name: 'carouselId', index: 'carouselId', width: 50, key: true, hidden: true },
-            { label: 'Image', name: 'carouselUrl', index: 'carouselUrl', width: 120, formatter: coverImageFormatter },
+            { label: '图片', name: 'carouselUrl', index: 'carouselUrl', width: 120, formatter: coverImageFormatter },
             { label: '跳转链接', name: 'redirectUrl', index: 'redirectUrl', width: 120 },
             { label: '排序值', name: 'carouselRank', index: 'carouselRank', width: 60, align: 'center' },
             { label: '是否删除', name: 'isDeleted', index: 'isDeleted', width: 60, hidden:true },
