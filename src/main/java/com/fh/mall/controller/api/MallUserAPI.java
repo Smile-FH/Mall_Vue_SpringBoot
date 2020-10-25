@@ -27,7 +27,7 @@ import javax.validation.Valid;
 @RestController
 @Api(tags = "Vue商城用户功能接口")
 @RequestMapping("/mall/api")
-public class MallUserAPI {
+public class MallUserApi {
 
     @Autowired
     private MallUserService mallUserService;

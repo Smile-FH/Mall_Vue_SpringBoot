@@ -3,6 +3,7 @@ package com.fh.mall.service;
 import java.util.List;
 import java.util.Map;
 
+import com.fh.mall.controller.api.vo.MallClassifyFirstLevelVo;
 import com.fh.mall.entity.MallGoodsCategory;
 import com.fh.mall.utils.PageQueryUtil;
 import com.fh.mall.utils.PageResult;
@@ -43,5 +44,11 @@ public interface MallGoodsCategoryService{
      * @param params
      * @return PageResult
      */
-    PageResult categoryList(PageQueryUtil params);
+    PageResult getCategoryList(PageQueryUtil params);
+
+    /**
+     * 获取不同层级的分类数据
+     * @return
+     */
+    List<MallClassifyFirstLevelVo> getCategoryListByLevel();
 }

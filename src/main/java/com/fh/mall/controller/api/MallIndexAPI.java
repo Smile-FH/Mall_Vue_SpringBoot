@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @Api(tags = "Vue端商城首页接口")
 @RequestMapping("/mall/api")
-public class MallIndexAPI {
+public class MallIndexApi {
 
     @Autowired
     private MallCarouselService mallCarouselService;

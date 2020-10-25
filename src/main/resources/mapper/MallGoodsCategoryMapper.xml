@@ -239,7 +239,7 @@
              #{item.updateUser,jdbcType=INTEGER})
         </foreach>
     </insert>
-    <select id="categoryList" resultMap="BaseResultMap">
+    <select id="getCategoryList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from mall_goods_category
@@ -254,6 +254,23 @@
         </where>
         order by mall_goods_category.category_rank desc
         limit #{p.start,jdbcType= INTEGER}, #{p.limit,jdbcType= INTEGER}
+    </select>
+    <select id="getCategoryListByLevel" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mall_goods_category
+        <where>
+            <if test="parentIds != null and parentIds.size() != 0">
+                and mall_goods_category.parent_id in
+                <foreach collection="parentIds" item="parentId" open="(" close=")" separator=",">
+                    #{parentId, jdbcType=INTEGER}
+                </foreach>
+            </if>
+            <if test="categoryLevel != null and categoryLevel != 0">
+                and mall_goods_category.category_level = #{categoryLevel, jdbcType=INTEGER}
+            </if>
+            and mall_goods_category.is_deleted = 0
+        </where>
     </select>
     <select id="getTotalCategory" resultType="java.lang.Integer">
         select count(1)

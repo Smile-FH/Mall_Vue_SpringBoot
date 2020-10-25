@@ -54,7 +54,7 @@ public class MallGoodsCategoryController {
     @ResponseBody
     public Result categoryList(@RequestParam Map<String, Object> params) {
         PageQueryUtil queryUtil = new PageQueryUtil(params);
-        PageResult pageResult = mallGoodsCategoryService.categoryList(queryUtil);
+        PageResult pageResult = mallGoodsCategoryService.getCategoryList(queryUtil);
         return ResultGenerator.getSuccessResult(pageResult);
     }
 

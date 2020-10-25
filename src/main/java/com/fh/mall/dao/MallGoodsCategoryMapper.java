@@ -40,7 +40,6 @@ public interface MallGoodsCategoryMapper {
     int insertSelective(MallGoodsCategory record);
 
     /**
-     *
      * @param param
      * @return
      */
@@ -66,14 +65,24 @@ public interface MallGoodsCategoryMapper {
 
     int batchInsert(@Param("list") List<MallGoodsCategory> list);
 
-    List<MallGoodsCategory> categoryList(@Param("p") PageQueryUtil pageQueryUtil);
+    List<MallGoodsCategory> getCategoryList(@Param("p") PageQueryUtil pageQueryUtil);
 
     int getTotalCategory();
 
     /**
      * 根据商品分类Id查询分类
+     *
      * @param categoryId
      * @return
      */
     MallGoodsCategory selectByCategoryId(Integer categoryId);
+
+    /**
+     * 获取层级下的所有分类数据
+     *
+     * @param categoryLevel
+     * @param parentIds
+     * @return
+     */
+    List<MallGoodsCategory> getCategoryListByLevel(@Param("categoryLevel") Integer categoryLevel, @Param("parentIds") List<Integer> parentIds);
 }

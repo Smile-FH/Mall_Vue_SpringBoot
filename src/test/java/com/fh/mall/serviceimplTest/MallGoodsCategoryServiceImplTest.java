@@ -31,7 +31,7 @@ public class MallGoodsCategoryServiceImplTest {
         map.put("page",1);
         map.put("limit",5);
         PageQueryUtil pageQueryUtil = new PageQueryUtil(map);
-        PageResult pageResult = mallGoodsCategoryService.categoryList(pageQueryUtil);
+        PageResult pageResult = mallGoodsCategoryService.getCategoryList(pageQueryUtil);
         System.out.println(pageResult.toString());
     }
 
